@@ -10,7 +10,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: $base-font-family;
+    
 }
+
+
 
 
 
@@ -23,6 +26,13 @@
 @import "./pages/ProductionReport/index.scss";
 @import "./pages/Stock/index.scss";
 @import "./pages/Users/index.scss";
+
+// Components
+
+@import "./components/Input/index.scss";
+@import "./components/Button/index.scss";
+
+
 
 
 
