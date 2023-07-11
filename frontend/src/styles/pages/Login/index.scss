@@ -1,3 +1,36 @@
-.exemple{
+.container-page-login{
+   background-color: $color-gray;
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 
+   .container-login{
+        width: 1080px;
+        height: 704px;
+        background-color: $color-white;
+        border-radius: 16px;
+        display: flex;
+
+        .container-style-uptechnology{
+               width: 540px;
+               height: 672px; 
+               background-color: $color-faint-gray;
+               border-radius: 16px;
+               margin: 16px;
+
+               .image-logo-up{
+                
+               }
+        }
+
+        .container-style-client{
+            width: 540px;
+            height: 672px;
+            background-color: aqua;
+            margin: 16px;
+            
+        }
+   }
 }
