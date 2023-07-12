@@ -10,7 +10,7 @@
         position: relative;
         margin-bottom: 16px;
         height: 54px;
-        width: 390px;
+        width: clamp( 20rem , 29vw , 24.375rem);
         padding: 0px 8px;
     
         display: flex;
