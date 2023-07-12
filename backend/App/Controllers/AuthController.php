@@ -19,6 +19,24 @@ final class AuthController
 
         $password = $data['senha'];
 
+        if(!$email || !$password){
+            try{
+
+                throw new \Exception("O email e a senha não foi passado na requisição");
+
+            }catch(\Exception | \Throwable $ex){
+
+                return $response -> withJson([
+                    'error' => \Exception::class,
+                    'status' => 400,
+                    'code' => "002",
+                    'userMessage' => 'Dados nulos, passe o email e a senha',
+                    'developerMessage' => $ex -> getMessage()
+                ] , 401);
+
+            }
+        }
+
         $expiredDate = (new \DateTime('now', new \DateTimeZone('America/Sao_Paulo')))->modify('+7 hours')->format('Y-m-d H:i:s');
 
         $userDAO = new UsersDAO();

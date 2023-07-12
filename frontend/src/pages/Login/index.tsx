@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React, {useState , useContext} from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import {Context} from '../../AuthContext/AuthContext';
 
 
 
 
 const PageLoguin: React.FC = () => {
+
+    const {authenticated , handleLogin} : any = useContext(Context);
 
     const [nameUserInput , setNameUserInput] = useState('');
     
@@ -54,7 +57,12 @@ const PageLoguin: React.FC = () => {
                             <Input info="Senha:" icon="visibility" onChange={(text : any) => setPasswordUserInput(text.target.value)} />
                         </div>
 
-                        <Button text="Entrar" />
+                        
+
+                            <Button text="Entrar" onClick={handleLogin}/>
+                            
+                        
+                        
 
                     </div>
 
