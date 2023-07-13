@@ -1,30 +1,44 @@
-import React, {useState , useContext} from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import {Context} from '../../AuthContext/AuthContext';
+import { Context } from '../../AuthContext/AuthContext';
 import useAuth from '../../AuthContext/hooks/UseAuth';
-
+import { isValidEmail } from "../../utils/Validation";
 
 
 const PageLoguin: React.FC = () => {
 
-    const {authenticated , handleLogin } : any = useContext(Context);
-   
+    const { handleLogin }: any = useContext(Context);
+
     
 
-    const [nameUserInput , setNameUserInput] = useState('');
-    
-    const [passwordUserInput , setPasswordUserInput] = useState('');
+    const [emailUserInput, setEmailUserInput] = useState('');
 
-    const Login = () => {
-        if(!nameUserInput || !passwordUserInput)
-            return
-        
-         handleLogin(nameUserInput , passwordUserInput);
-        
-        
-    } 
-     
+    const [passwordUserInput, setPasswordUserInput] = useState('');
+
+    const isValidationPress = () => {
+
+        if (!emailUserInput || !passwordUserInput)
+            return false;
+
+        if (!isValidEmail(emailUserInput)){
+            
+            return false;
+        }
+            
+
+        return true
+    }
+
+    const onConfirmButtonPress = () => {
+
+        if (!isValidationPress())
+            return alert("Preencha todos os campos corretamente")
+
+        handleLogin(emailUserInput, passwordUserInput);
+
+    }
+
     return (
         <div className="container-page-login">
 
@@ -59,22 +73,17 @@ const PageLoguin: React.FC = () => {
                     <div className="container-inputs-login">
 
                         <div className="input-name-user">
-                            <Input info="Email:" onChange={(text : any) => setNameUserInput(text.target.value)} />
+                            <Input info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => isValidEmail(emailUserInput)} />
+                            <p></p>
                         </div>
 
                         <div className="input-password-user">
-                            <Input info="Senha:" icon="visibility" onChange={(text : any) => setPasswordUserInput(text.target.value)} />
+                            <Input info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} />
                         </div>
 
-                        
-
-                            <Button text="Entrar" onClick={Login}/>
-                            
-                        
-                        
+                        <Button text="Entrar" onClick={onConfirmButtonPress} />
 
                     </div>
-
 
                 </div>
 

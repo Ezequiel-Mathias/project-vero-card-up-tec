@@ -6,6 +6,8 @@
     p{
         font-weight: $font-semibold;
     }
+
+   
     .input{
         position: relative;
         margin-bottom: 16px;
@@ -32,6 +34,15 @@
             cursor: pointer;
             transition: color .25s ease-out;
         }
+
+        &.error {
+            border-color: $color-client !important;
+            color: $color-client !important;
+        
+            .icon {
+              color: $color-client !important;
+            }
+          }
         
         input{
             outline: none;
@@ -42,6 +53,10 @@
             width: 100%;
             
         }
+
     }
+
+
+   
 }
 
