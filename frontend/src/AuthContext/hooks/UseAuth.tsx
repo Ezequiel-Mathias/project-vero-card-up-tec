@@ -2,10 +2,6 @@ import { useState , useEffect } from "react";
 import api from "../../connectionAPI";
 import { useNavigate } from 'react-router-dom';
 
-interface IAuthProps {
-    email : string,
-    senha : string
-}
 
 
 export default function useAuth() {
@@ -26,17 +22,28 @@ export default function useAuth() {
         setLoading(false);
     }, [])
 
-    const handleLogin = async (email : string , senha : string) => {
+     const handleLogin = async (email? : string , senha? : string) => {
         const data = await api.post('/login', {
             email: email,
             senha: senha
         }).then((data) => {
+
+            if(!data.data.token)
+                return;
+
             localStorage.setItem('token', JSON.stringify(data.data.token));
+
             api.defaults.headers.Authorization = `Bearer ${data.data.token}`;
+
             setAuthenticated(true);
+
             navigate('/home');
+
         }).catch((error: any) => {
-            console.log("LOGIN ERRADOO")
+            console.clear();
+            console.log("LOGIN ERRADOO");
+            
+            
         });
     }
 

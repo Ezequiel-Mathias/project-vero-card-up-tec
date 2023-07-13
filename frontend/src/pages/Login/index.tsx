@@ -2,20 +2,29 @@ import React, {useState , useContext} from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import {Context} from '../../AuthContext/AuthContext';
-
+import useAuth from '../../AuthContext/hooks/UseAuth';
 
 
 
 const PageLoguin: React.FC = () => {
 
-    const {authenticated , handleLogin} : any = useContext(Context);
+    const {authenticated , handleLogin } : any = useContext(Context);
+   
+    
 
     const [nameUserInput , setNameUserInput] = useState('');
     
     const [passwordUserInput , setPasswordUserInput] = useState('');
 
-    
-    
+    const Login = () => {
+        if(!nameUserInput || !passwordUserInput)
+            return
+        
+         handleLogin(nameUserInput , passwordUserInput);
+        
+        
+    } 
+     
     return (
         <div className="container-page-login">
 
@@ -50,7 +59,7 @@ const PageLoguin: React.FC = () => {
                     <div className="container-inputs-login">
 
                         <div className="input-name-user">
-                            <Input info="Nome de usuario:" onChange={(text : any) => setNameUserInput(text.target.value)} />
+                            <Input info="Email:" onChange={(text : any) => setNameUserInput(text.target.value)} />
                         </div>
 
                         <div className="input-password-user">
@@ -59,7 +68,7 @@ const PageLoguin: React.FC = () => {
 
                         
 
-                            <Button text="Entrar" onClick={handleLogin}/>
+                            <Button text="Entrar" onClick={Login}/>
                             
                         
                         
