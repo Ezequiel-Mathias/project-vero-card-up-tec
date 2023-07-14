@@ -13,8 +13,8 @@ const PublicRouter: React.FC = () => {
             {
                 !authenticated || authenticated ?
                     <Routes>
-                        <Route index path="/" element={<PageLoguin />} />
-                        <Route path="*" element={<Outlet/>} />
+                        <Route index path={`${process.env.PUBLIC_URL}/`} element={<PageLoguin />} />
+                        <Route path={`${process.env.PUBLIC_URL}*`} element={<Outlet/>} />
                     </Routes>
                     :
                     null
