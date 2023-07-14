@@ -10,30 +10,47 @@ const PageLoguin: React.FC = () => {
 
     const { handleLogin }: any = useContext(Context);
 
-    
+    const [emailVerification, setEmailVerification] = useState(true);
 
     const [emailUserInput, setEmailUserInput] = useState('');
 
     const [passwordUserInput, setPasswordUserInput] = useState('');
 
-    const isValidationPress = () => {
+    const ValidateEmail = () => {
+
+        if (!isValidEmail(emailUserInput)) {
+
+            setEmailVerification(false);
+
+            return false
+        }
+
+        setEmailVerification(true);
+
+        return true;
+    }
+
+    const isValidationLogin = () => {
 
         if (!emailUserInput || !passwordUserInput)
             return false;
 
-        if (!isValidEmail(emailUserInput)){
-            
-            return false;
-        }
-            
+        if (!isValidEmail(emailUserInput)) {
 
-        return true
+            setEmailVerification(false);
+
+            return false
+        }
+
+        setEmailVerification(true);
+
+        return true;
     }
 
     const onConfirmButtonPress = () => {
 
-        if (!isValidationPress())
-            return alert("Preencha todos os campos corretamente")
+        if (!isValidationLogin())
+            return;
 
         handleLogin(emailUserInput, passwordUserInput);
 
@@ -67,14 +84,14 @@ const PageLoguin: React.FC = () => {
                     </div>
 
                     <h1>Entrar</h1>
-                    <p>Faça login para iniciar sua sessão</p>
 
+                    <p>Faça login para iniciar sua sessão</p>
 
                     <div className="container-inputs-login">
 
                         <div className="input-name-user">
-                            <Input info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => isValidEmail(emailUserInput)} />
-                            <p></p>
+                            <Input info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
+                            {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
                         </div>
 
                         <div className="input-password-user">

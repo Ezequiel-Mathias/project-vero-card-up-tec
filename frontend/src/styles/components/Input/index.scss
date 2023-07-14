@@ -36,11 +36,11 @@
         }
 
         &.error {
-            border-color: $color-client !important;
-            color: $color-client !important;
+            border-color: $color-red !important;
+            color: $color-red !important;
         
             .icon {
-              color: $color-client !important;
+              color: $color-red !important;
             }
           }
         
