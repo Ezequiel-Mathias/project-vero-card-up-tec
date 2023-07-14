@@ -1,6 +1,7 @@
 import { useState , useEffect } from "react";
 import api from "../../connectionAPI";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
@@ -41,9 +42,14 @@ export default function useAuth() {
 
         }).catch((error: any) => {
             console.clear();
-            console.log("LOGIN ERRADOO");
-            
-            
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Login invalido...',
+                text: 'Email ou senha incorretos, verifique os dados e tente novamente.',
+              });
+
+              
         });
     }
 

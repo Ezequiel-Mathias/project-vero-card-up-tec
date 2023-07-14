@@ -91,6 +91,17 @@
                 margin-top: 48px;
                 gap: 32px;
 
+                .input-name-user , .input-password-user{
+
+                    .message-error-verification{
+
+                        p{
+                            
+                           color: $color-red;
+                        }
+                    } 
+                }
+
                 .button{
                     margin-top: 32px;
 

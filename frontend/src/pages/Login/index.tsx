@@ -1,9 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext , useEffect} from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Context } from '../../AuthContext/AuthContext';
 import useAuth from '../../AuthContext/hooks/UseAuth';
 import { isValidEmail } from "../../utils/Validation";
+import Swal from 'sweetalert2';
+
 
 
 const PageLoguin: React.FC = () => {
@@ -11,6 +13,10 @@ const PageLoguin: React.FC = () => {
     const { handleLogin }: any = useContext(Context);
 
     const [emailVerification, setEmailVerification] = useState(true);
+
+    const [teste , seTeste] = useState(true);
+
+    const [passwordVerification, setPasswordVerification] = useState(true);
 
     const [emailUserInput, setEmailUserInput] = useState('');
 
@@ -30,31 +36,68 @@ const PageLoguin: React.FC = () => {
         return true;
     }
 
-    const isValidationLogin = () => {
+    const ValidatePassword = () => {
 
-        if (!emailUserInput || !passwordUserInput)
-            return false;
+        if (passwordUserInput.length < 6) {
 
-        if (!isValidEmail(emailUserInput)) {
-
-            setEmailVerification(false);
+            setPasswordVerification(false);
 
             return false
         }
 
-        setEmailVerification(true);
+        setPasswordVerification(true);
 
         return true;
     }
 
-    const onConfirmButtonPress = () => {
+    const isValidationLogin = () => {
 
-        if (!isValidationLogin())
+        if (!emailUserInput || !passwordUserInput) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Campos vazios...',
+                text: 'Preencha todos os campos para efetuar o login.',
+            });
+            return false;
+        }
+
+        if (!ValidateEmail() || !ValidatePassword())
+            return false;
+
+        return true;
+    }
+
+    const onConfirmButtonPress = (event : any) => {
+
+        
+              
+            if (!isValidationLogin())
             return;
 
+
         handleLogin(emailUserInput, passwordUserInput);
+       
+
+        
+
 
     }
+
+
+ /*    useEffect(() => {
+
+        window.addEventListener("keydown", (event) => {
+           if(event.key === 'Enter'){
+            return onConfirmButtonPress(event.key)
+           }
+           
+           
+        });
+    
+        return () => {
+          window.removeEventListener("keydown", onConfirmButtonPress);
+        };
+      }, []); */
 
     return (
         <div className="container-page-login">
@@ -91,14 +134,21 @@ const PageLoguin: React.FC = () => {
 
                         <div className="input-name-user">
                             <Input info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
-                            {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
+                            <div className="message-error-verification">
+                                {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
+                            </div>
+
                         </div>
 
                         <div className="input-password-user">
-                            <Input info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} />
+                            <Input info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} validate={() => ValidatePassword()} />
+                            <div className="message-error-verification">
+                                {!passwordVerification ? <p>A senha deve conter mais de 5 digitos</p> : null}
+                            </div>
+
                         </div>
 
-                        <Button text="Entrar" onClick={onConfirmButtonPress} />
+                        <Button text="Entrar" onClick={onConfirmButtonPress}  />
 
                     </div>
 
