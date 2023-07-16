@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     position: fixed;
 
     p {
@@ -67,7 +68,7 @@
 
             .container-logos {
 
-                .image-logo-client {
+                .image-logo-client-red {
                     display: flex;
                     justify-content: center;
                     margin-top: 16px;
@@ -120,6 +121,7 @@
                         p {
 
                             color: $color-red;
+                            margin-bottom: -20px;
                         }
                     }
                 }
@@ -156,7 +158,7 @@
                     align-items: center;
 
 
-                    .image-logo-client {
+                    .image-logo-client-red {
                         width: 50%;
                     }
 
@@ -173,6 +175,23 @@
                     }
                 }
             }
+        }
+    }
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 10px;
+        left: 0;
+        text-align: center;
+        color: $color-white;
+        font-weight: $font-bold;
+    }
+
+    @media(max-width: $breakpoint-small ) {
+        footer{
+            display: none;
         }
     }
 }

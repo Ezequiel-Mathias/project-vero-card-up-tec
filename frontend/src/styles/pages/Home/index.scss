@@ -1,3 +1,22 @@
-.exemple{
+.container-page-home{
 
+    header{
+        background-color: $color-client;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+
+        nav {
+            width: 797px;
+            ul{
+                display: flex;
+                justify-content: space-evenly;
+                list-style: none;
+                li{
+                    color: $color-white;
+                }
+            }
+        }
+    }
 }

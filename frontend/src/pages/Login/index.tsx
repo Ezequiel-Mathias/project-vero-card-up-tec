@@ -101,7 +101,7 @@ const PageLoguin: React.FC = () => {
                 <div className="container-style-client">
 
                     <div className="container-logos">
-                        <div className="image-logo-client">
+                        <div className="image-logo-client-red">
                             <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoVerocard.svg?alt=media&token=dfa37f53-dd1d-4d6d-84ed-8a95fe4069b7' alt="Logo up" />
 
                         </div>
@@ -143,6 +143,8 @@ const PageLoguin: React.FC = () => {
                 </div>
 
             </div>
+
+          <footer><p>Copyright 2023 © | Up Technology by Ezequiel Mathias</p></footer>  
 
         </div>
     )
