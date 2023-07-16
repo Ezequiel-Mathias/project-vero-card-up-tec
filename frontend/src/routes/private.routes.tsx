@@ -4,9 +4,9 @@ import { useContext } from "react";
 import PageStock from '../pages/Stock';
 import PageCardsIssued from '../pages/CardsIssued';
 import PageUsers from '../pages/Users';
-import { Route, Routes , Navigate , Outlet} from 'react-router-dom';
-import { AuthProvider, Context } from '../AuthContext/AuthContext';
-import PageLoguin from '../pages/Login';
+import { Route, Routes , Outlet} from 'react-router-dom';
+import { Context } from '../AuthContext/AuthContext';
+
 
 
 

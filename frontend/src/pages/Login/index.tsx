@@ -1,8 +1,7 @@
-import React, { useState, useContext , useEffect} from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Context } from '../../AuthContext/AuthContext';
-import useAuth from '../../AuthContext/hooks/UseAuth';
 import { isValidEmail } from "../../utils/Validation";
 import Swal from 'sweetalert2';
 
@@ -13,8 +12,6 @@ const PageLoguin: React.FC = () => {
     const { handleLogin }: any = useContext(Context);
 
     const [emailVerification, setEmailVerification] = useState(true);
-
-    const [teste , seTeste] = useState(true);
 
     const [passwordVerification, setPasswordVerification] = useState(true);
 
@@ -57,6 +54,7 @@ const PageLoguin: React.FC = () => {
                 icon: 'error',
                 title: 'Campos vazios...',
                 text: 'Preencha todos os campos para efetuar o login.',
+                preConfirm: Button
             });
             return false;
         }
@@ -67,37 +65,17 @@ const PageLoguin: React.FC = () => {
         return true;
     }
 
-    const onConfirmButtonPress = (event : any) => {
+    const onConfirmButtonPress = (event: any) => {
 
-        
-              
+        if (event.type === 'click' || event.key === 'Enter') {
+
             if (!isValidationLogin())
-            return;
+                return;
 
+            handleLogin(emailUserInput, passwordUserInput);
 
-        handleLogin(emailUserInput, passwordUserInput);
-       
-
-        
-
-
+        }
     }
-
-
- /*    useEffect(() => {
-
-        window.addEventListener("keydown", (event) => {
-           if(event.key === 'Enter'){
-            return onConfirmButtonPress(event.key)
-           }
-           
-           
-        });
-    
-        return () => {
-          window.removeEventListener("keydown", onConfirmButtonPress);
-        };
-      }, []); */
 
     return (
         <div className="container-page-login">
@@ -122,8 +100,14 @@ const PageLoguin: React.FC = () => {
 
                 <div className="container-style-client">
 
-                    <div className="image-logo-client">
-                        <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoVerocard.svg?alt=media&token=dfa37f53-dd1d-4d6d-84ed-8a95fe4069b7' alt="Logo up" />
+                    <div className="container-logos">
+                        <div className="image-logo-client">
+                            <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoVerocard.svg?alt=media&token=dfa37f53-dd1d-4d6d-84ed-8a95fe4069b7' alt="Logo up" />
+
+                        </div>
+                        <div className="image-logo-up">
+                            <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
+                        </div>
                     </div>
 
                     <h1>Entrar</h1>
@@ -133,7 +117,7 @@ const PageLoguin: React.FC = () => {
                     <div className="container-inputs-login">
 
                         <div className="input-name-user">
-                            <Input info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
+                            <Input onKeyUp={onConfirmButtonPress} info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
                             <div className="message-error-verification">
                                 {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
                             </div>
@@ -141,14 +125,18 @@ const PageLoguin: React.FC = () => {
                         </div>
 
                         <div className="input-password-user">
-                            <Input info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} validate={() => ValidatePassword()} />
+
+                            <Input onKeyUp={onConfirmButtonPress} info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} validate={() => ValidatePassword()} />
+
                             <div className="message-error-verification">
+
                                 {!passwordVerification ? <p>A senha deve conter mais de 5 digitos</p> : null}
+
                             </div>
 
                         </div>
 
-                        <Button text="Entrar" onClick={onConfirmButtonPress}  />
+                        <Button text="Entrar" onClick={onConfirmButtonPress} />
 
                     </div>
 

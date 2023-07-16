@@ -38,9 +38,9 @@ export default function useAuth() {
 
             setAuthenticated(true);
 
-            navigate('/home');
+            navigate(`${process.env.PUBLIC_URL}/home`);
 
-        }).catch((error: any) => {
+        }).catch(() => {
             console.clear();
 
             Swal.fire({
@@ -57,7 +57,7 @@ export default function useAuth() {
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = null;
         setAuthenticated(false);
-        navigate('/');
+        navigate(`${process.env.PUBLIC_URL}/`);
     }
 
     if (loading) {
