@@ -1,0 +1,68 @@
+.container-input {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    p {
+        font-weight: $font-semibold;
+    }
+
+
+    .input {
+        position: relative;
+        margin-bottom: 16px;
+        height: 54px;
+        width: clamp(19rem, 31vw, 24.375rem);
+        padding: 0px 8px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 18px;
+
+        border: 2px solid;
+        border-color: $color-gray;
+        border-radius: 8px;
+        border-style: solid;
+
+        transition: border .25s ease-out;
+        
+
+
+        .icon {
+            color: $color-client;
+            font-size: 140%;
+            cursor: pointer;
+            transition: color .25s ease-out;
+        }
+
+        &.error {
+            border-color: $color-red !important;
+            color: $color-red !important;
+            animation: tremer .2s;
+            animation-iteration-count: 3;
+
+            @keyframes tremer {
+                0% {margin-left: 0;}
+                25% {margin-left: 7px;}
+                50% {margin-left: 0;}
+                75% {margin-left: -7px;}
+                100% {margin-left: 0;}
+            }
+
+        }
+
+        input {
+            outline: none;
+            border: none;
+            color: $color-black;
+            font-weight: $font-semibold;
+            height: 100%;
+            width: 100%;
+
+        }
+
+    }
+
+}

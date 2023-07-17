@@ -1,8 +1,18 @@
+/* Font import */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 @import "./vars.scss";
 
-
 // Project global stylizations
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $base-font-family;
+    
+}
+
 
 
 
@@ -16,6 +26,17 @@
 @import "./pages/ProductionReport/index.scss";
 @import "./pages/Stock/index.scss";
 @import "./pages/Users/index.scss";
+
+// Components
+
+@import "./components/shared/Input/index.scss";
+@import "./components/shared/Button/index.scss";
+@import "./components/layout/NavBarClient/index.scss"
+
+
+
+
+
 
 
 

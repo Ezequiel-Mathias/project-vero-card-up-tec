@@ -1,0 +1,43 @@
+header {
+    background-color: $color-client;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+
+    .image-logo-client-white {
+        margin-left: 70px;
+    }
+
+    nav {
+        width: 797px;
+        margin-right: 70px;
+
+        ul {
+            display: flex;
+            list-style: none;
+            justify-content: end;
+            gap: 64px;
+
+            li {
+                
+                font-weight: $font-semibold;
+                cursor: pointer;
+
+                a{
+                  text-decoration: none; 
+                  color: $color-white; 
+                }
+            }
+
+            li:hover {
+                cursor: pointer;
+                border-bottom: 3px solid $color-white;
+                transition: all 0.1s;
+                transform: scale(1.1);
+                margin-top: -3px;
+            }
+        }
+    }
+}

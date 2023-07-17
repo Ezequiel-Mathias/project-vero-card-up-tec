@@ -1,3 +1,39 @@
-.exemple{
+.container-page-home {
 
+   
+
+
+    .image-logo-up{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 64px;
+    }
+
+
+    .container-table{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-top: 72px;
+        
+
+        .table{
+            width: 936px;
+            height: 100px;
+            border: 2px  solid $color-black;
+            border-radius: 8px;
+
+
+            h3{
+                text-align: center;
+                border-bottom: 2px  solid $color-black;
+                padding: 8px;
+            }
+
+            .column-table{
+                
+            }
+        }
+    }
 }

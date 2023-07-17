@@ -1,3 +1,200 @@
-.exemple{
+.container-page-login {
+    background-color: $color-gray;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
 
+    p {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+
+    .container-login {
+        width: clamp(52.5rem, 70vw, 67.5rem);
+        height: 704px;
+        background-color: $color-white;
+        border-radius: 16px;
+        display: flex;
+
+        .container-style-uptechnology {
+            width: clamp(25rem, 35vw, 33.75rem);
+            height: 672px;
+            background-color: $color-faint-gray;
+            border-radius: 16px;
+            margin: 16px;
+
+            .image-logo-up {
+                display: flex;
+                justify-content: center;
+                margin-top: 16px;
+
+                img {
+                    width: clamp(7rem, 9vw, 7.688rem);
+                }
+            }
+
+            .greetings-up {
+                margin-top: 42px;
+                width: clamp(25rem, 34vw, 32.75rem);
+                padding: 16px;
+
+                p {
+                    text-align: center;
+                    color: $color-blue;
+                    font-weight: $font-semibold;
+                    font-size: clamp(0.9rem, 2vw, 1rem);
+                }
+            }
+
+            .image-user-login {
+                display: flex;
+                justify-content: center;
+                margin-top: 22px;
+
+                img {
+                    width: clamp(21rem, 30vw, 25.188rem);
+                }
+            }
+
+        }
+
+        .container-style-client {
+            width: clamp(32rem, 33vw, 33.75rem);
+            height: 672px;
+            margin: 16px;
+
+            .container-logos {
+
+                .image-logo-client-red {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 16px;
+
+                    img {
+                        width: clamp(7rem, 9vw, 7.688rem);
+                    }
+
+
+                }
+
+                .image-logo-up {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 16px;
+
+
+                    img {
+                        visibility: hidden;
+                        width: 0px;
+                    }
+                }
+
+            }
+
+            h1,
+            p {
+                text-align: center;
+                color: $color-client;
+            }
+
+            h1 {
+                margin-top: 58px;
+                margin-bottom: 24px;
+                font-size: clamp(1.7rem, 3vw, 2rem);
+            }
+
+            .container-inputs-login {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 48px;
+                gap: 32px;
+
+                .input-name-user,
+                .input-password-user {
+
+                    .message-error-verification {
+
+                        p {
+
+                            color: $color-red;
+                            margin-bottom: -20px;
+                        }
+                    }
+                }
+
+                .button {
+                    margin-top: 32px;
+
+                    p {
+                        color: $color-white;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    @media(max-width: $breakpoint-laptop ) {
+
+        .container-login {
+            width: clamp(21rem, 90vw, 29rem);
+            height: clamp(39.5rem, 140vw, 44rem);
+
+            .container-style-uptechnology {
+                display: none;
+            }
+
+            .container-style-client {
+
+                .container-logos {
+                    display: flex;
+                    justify-content: center;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+
+                    .image-logo-client-red {
+                        width: 50%;
+                    }
+
+                    .image-logo-up {
+                        border: 2px;
+                        border-left-style: solid;
+                        border-left-color: $color-gray;
+                        width: 50%;
+
+                        img {
+                            visibility: visible;
+                            width: 80px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 10px;
+        left: 0;
+        text-align: center;
+        color: $color-white;
+        font-weight: $font-bold;
+        
+    }
+
+    @media(max-width: $breakpoint-small) , (max-height: $breakpoint-medium){
+        footer{
+            display: none;
+        }
+    }
+
+    
 }
