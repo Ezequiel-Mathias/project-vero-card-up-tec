@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-
 import { Context } from "../../AuthContext/AuthContext";
-import Button from "../../components/Button";
+import Button from "../../components/shared/Button";
+import NavBarClient from "../../components/layout/NavBarClient";
 
 
 const PageHome: React.FC = () => {
@@ -10,21 +10,39 @@ const PageHome: React.FC = () => {
 
     return (
         <div className="container-page-home">
-            <header>
-                <div className="image-logo-client-white">
-                    <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/Logo-Vero-Card-White.png?alt=media&token=f6ec1ceb-9e8e-4098-b969-d379b50811a8' alt="Logo up" />
+            
+            <NavBarClient titles={
+                [ <a href="">Home</a> , 
+                <a href="">Relatorio de Produção</a> , 
+                <a href="">Estoque</a> , 
+                <a href="">Admin Users</a> , 
+                <a href="">Cartões Emitidos</a>]
+                }/>
+
+            <div className="image-logo-up">
+                <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
+            </div>
+
+
+            <div className="container-table">
+
+                <div className="table">
+                        
+                    <div className="title-table">
+                        <h3>Em Produção</h3>
+                    </div>
+                    <div className="column-table">
+                          <span>Produto</span>
+                          <span>Número op</span>
+                          <span>Data</span>
+                          <span>Qtd Objs</span>
+                    </div>
 
                 </div>
-                <nav>
-                    <ul className="nav-list">
-                        <li>Home</li>
-                        <li>Relatório de produção</li>
-                        <li>Estoque</li>
-                        <li>Admin users</li>
-                        <li>Cartões emitidos</li>
-                    </ul>
-                </nav>
-            </header>
+
+            </div>
+
+
         </div>
     )
 }

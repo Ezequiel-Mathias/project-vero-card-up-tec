@@ -29,8 +29,9 @@
 
 // Components
 
-@import "./components/Input/index.scss";
-@import "./components/Button/index.scss";
+@import "./components/shared/Input/index.scss";
+@import "./components/shared/Button/index.scss";
+@import "./components/layout/NavBarClient/index.scss"
 
 
 
