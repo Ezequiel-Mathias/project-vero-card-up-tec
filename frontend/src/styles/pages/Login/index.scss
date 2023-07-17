@@ -187,9 +187,16 @@
         text-align: center;
         color: $color-white;
         font-weight: $font-bold;
+        
     }
 
-    @media(max-width: $breakpoint-small ) {
+    @media(max-width: $breakpoint-small){
+        footer{
+            display: none;
+        }
+    }
+
+    @media(max-height: 750px){
         footer{
             display: none;
         }
