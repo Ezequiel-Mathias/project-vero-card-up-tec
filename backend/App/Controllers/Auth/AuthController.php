@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
-use App\DAO\VeroCard\TokensDAO;
-use App\DAO\VeroCard\UsersDAO;
+namespace App\Controllers\Auth;
+use App\DAO\VeroCard\Tokens\TokensDAO;
+use App\DAO\VeroCard\Users\UsersDAO;
 use App\Models\TokenModel;
 use Firebase\JWT\JWT;
 use Psr\Http\Message\ServerRequestInterface as Request;

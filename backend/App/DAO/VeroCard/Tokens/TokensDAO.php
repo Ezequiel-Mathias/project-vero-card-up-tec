@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DAO\VeroCard;
+namespace App\DAO\VeroCard\Tokens;
 use App\DAO\VeroCard\Connection;
 use App\Models\TokenModel;
 
