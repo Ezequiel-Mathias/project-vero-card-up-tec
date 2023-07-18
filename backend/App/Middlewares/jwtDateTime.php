@@ -18,7 +18,7 @@ final class jwtDateTime{
     
     if($expireDate < $now)
         try{
-            throw new \Exception("Token de refresh inesxistente ou invalido");
+            throw new \Exception("Token inesxistente ou invalido");
     
         }catch(\Exception | \Throwable $ex){
     

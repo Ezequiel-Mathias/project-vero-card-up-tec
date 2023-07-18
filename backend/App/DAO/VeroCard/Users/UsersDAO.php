@@ -1,6 +1,7 @@
 <?php
 
-namespace App\DAO\VeroCard;
+namespace App\DAO\VeroCard\Users;
+use App\DAO\VeroCard\Connection;
 use App\Models\UsersModel;
 
 class UsersDAO extends Connection
