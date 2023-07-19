@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 
 
-export default function useAuth() {
+export function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
 
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ export default function useAuth() {
     }, [])
 
      const handleLogin = async (email? : string , senha? : string) => {
-        const data = await api.post('/login', {
+         await api.post('/login', {
             email: email,
             senha: senha
         }).then((data) => {
@@ -66,3 +66,5 @@ export default function useAuth() {
 
     return {authenticated, loading , handleLogin , handleLogout}
 }
+
+export const getToken = () => localStorage.getItem('token');

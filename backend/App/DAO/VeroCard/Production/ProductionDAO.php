@@ -32,7 +32,7 @@ class ProductionDAO extends Connection{
      FROM ordem_producao a
           JOIN ordem_producao_status b ON a.id_op = b.id_op
           JOIN ordem_producao_detalhe c ON a.id_op = c.id_op 
-    WHERE a.id_cliente = 34 GROUP BY a.id_op , c.nome_arquivo,  a.qtd_objs ORDER BY a.dt_op DESC;")  
+    WHERE a.id_cliente = 34 GROUP BY a.id_op , c.nome_arquivo,  a.qtd_objs ORDER BY a.dt_op DESC LIMIT 100;")  
             ->fetchAll(\PDO::FETCH_ASSOC);
 
             return $products;

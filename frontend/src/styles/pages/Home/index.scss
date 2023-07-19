@@ -34,25 +34,23 @@
 
             .container-column-table {
 
-
+                span {
+                    font-weight: $font-semibold;
+                }
                 .title-column {
                     display: flex;
                     justify-content: space-between;
                     padding: 16px;
                     border-bottom: 2px solid $color-black;
 
-                    span {
-                        font-weight: $font-semibold;
-                    }
+                    
                 }
 
                 .rows-table{
                     display: flex;
                     justify-content: space-between;
                     margin: 16px;
-                    span {
-                        font-weight: $font-semibold;
-                    }
+                    
                 }
             }
         }

@@ -1,19 +1,38 @@
-import React, { useContext } from "react";
-import { Context } from "../../AuthContext/AuthContext";
-import Button from "../../components/shared/Button";
+import React, { useContext, useEffect, useState } from "react";
+import api from "../../connectionAPI";
 import NavBarClient from "../../components/layout/NavBarClient";
 import { Link } from "react-router-dom";
 
 
 const PageHome: React.FC = () => {
 
-    const { handleLogout }: any = useContext(Context);
+    const [datas, setData] = useState([]);
+
+    useEffect(() => {
+
+        api.get('/production')
+            .then((data) => {
+                setData(data.data)
+            }).catch((error) => {
+
+            });
+
+
+
+    })
+
+
+    console.log(datas)
+
+
+
+
 
     return (
         <div className="container-page-home">
 
             <NavBarClient titles={
-                [<Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link>    ,
+                [<Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link>,
                 <Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link>,
                 <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link>,
                 <Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link>,
@@ -41,13 +60,18 @@ const PageHome: React.FC = () => {
                             <span>Qtd Objs</span>
                         </div>
 
-                        <div className="rows-table">
-                            <span>Vero Card</span>
-                            <span>111111</span>
-                            <span>28/02/2023</span>
-                            <span>9000</span>
-                        </div>
+                        {datas &&
+                            datas.map((data: any) => (
 
+                                <div className="rows-table">
+                                    <span>Vero Card</span>
+                                    <span>111111</span>
+                                    <span>28/02/2023</span>
+                                    <span>9000</span>
+                                </div>
+
+                            ))
+                        }
                     </div>
 
                 </div>
@@ -55,7 +79,7 @@ const PageHome: React.FC = () => {
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
