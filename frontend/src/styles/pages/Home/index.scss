@@ -10,49 +10,54 @@
         margin-top: 64px;
     }
 
-
-    .container-table {
+    
+        
+       
+    .teste{
+        margin-top: 70px;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        margin-top: 72px;
+        justify-content: center;
+        font-weight: $font-semibold;
 
-
-        .table {
-            width: 936px;
-           
-            border: 2px solid $color-black;
-            border-radius: 8px;
-
-            .title-table {
-                h3 {
-                    text-align: center;
-                    border-bottom: 2px solid $color-black;
-                    padding: 8px;
-                }
-            }
-
-            .container-column-table {
-
-                span {
-                    font-weight: $font-semibold;
-                }
-                .title-column {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 16px;
-                    border-bottom: 2px solid $color-black;
-
-                    
-                }
-
-                .rows-table{
-                    display: flex;
-                    justify-content: space-between;
-                    margin: 16px;
-                    
-                }
-            }
+        h2{
+            border: solid 2px $color-black;  
+            width: 1000px;
+            text-align: center;
+            margin-bottom: -0,5px ;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
         }
+        
+        
+        .sc-dmsloy {
+            width: 1000px;
+            border: solid 2px $color-black;
+            border-top: hidden; 
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            
+
+            .rdt_TableHeadRow{
+                font-size: 20px;
+                font-weight: $font-semibold;
+            }
+
+            .rdt_TableRow{
+                font-size: 16px;
+                font-weight: $font-semibold;
+                
+            }
+            
+         }
     }
+       
+
+
+    
+
+
+
+
 }

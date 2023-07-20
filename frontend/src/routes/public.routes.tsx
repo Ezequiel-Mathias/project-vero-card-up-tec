@@ -2,7 +2,7 @@ import PageLoguin from '../pages/Login';
 import { Route, Routes , Navigate, Outlet} from "react-router-dom";
 import { AuthProvider, Context } from '../AuthContext/AuthContext';
 import { useContext } from "react";
-import PageHome from '../pages/Home';
+
 
 
 const PublicRouter: React.FC = () => {

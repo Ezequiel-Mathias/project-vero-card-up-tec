@@ -5,8 +5,6 @@ import { Context } from '../../AuthContext/AuthContext';
 import { isValidEmail } from "../../utils/Validation";
 import Swal from 'sweetalert2';
 
-
-
 const PageLoguin: React.FC = () => {
 
     const { handleLogin }: any = useContext(Context);
@@ -144,7 +142,7 @@ const PageLoguin: React.FC = () => {
 
             </div>
 
-          <footer><p>Copyright 2023 © | Up Technology by Ezequiel Mathias</p></footer>  
+            <footer><p>Copyright 2023 © | Up Technology by Ezequiel Mathias</p></footer>
 
         </div>
     )

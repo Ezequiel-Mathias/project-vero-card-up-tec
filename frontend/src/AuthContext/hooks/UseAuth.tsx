@@ -3,9 +3,8 @@ import api from "../../connectionAPI";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-
-
 export function useAuth() {
+
     const [authenticated, setAuthenticated] = useState(false);
 
     const navigate = useNavigate();
@@ -54,10 +53,15 @@ export function useAuth() {
     }
 
     function handleLogout() {
+
         localStorage.removeItem('token');
+
         api.defaults.headers.Authorization = null;
+
         setAuthenticated(false);
+
         navigate(`${process.env.PUBLIC_URL}/`);
+
     }
 
     if (loading) {
@@ -66,5 +70,3 @@ export function useAuth() {
 
     return {authenticated, loading , handleLogin , handleLogout}
 }
-
-export const getToken = () => localStorage.getItem('token');

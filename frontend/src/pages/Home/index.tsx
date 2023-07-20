@@ -1,28 +1,95 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../connectionAPI";
 import NavBarClient from "../../components/layout/NavBarClient";
 import { Link } from "react-router-dom";
+import Table from "../../components/layout/Table";
+import DataTable from 'react-data-table-component';
+
+
 
 
 const PageHome: React.FC = () => {
 
     const [datas, setData] = useState([]);
 
-    useEffect(() => {
+    
 
-        api.get('/production')
-            .then((data) => {
-                setData(data.data)
-            }).catch((error) => {
+    const columns: Array<Object> = [
+        {
+            name: 'Id op',
+            selector: (row: any) => row.id_op,
+            sortable: true,
+            
+        },
+        {
+            name: 'Nome do arquivo',
+            selector: (row: any) => row.nome_arquivo,
+            
+        },
+        {
+            name: 'Número de lote',
+            selector: (row: any) => row.nr_lote,
+            
+            
+        },
+        {
+            name: 'Tipo',
+            selector: (row: any) => row.tipo
+            
+        },
+        {
+            name: 'Data op',
+            selector: (row: any) => row.dt_op
+            
+        },
+        {
+            name: 'Quantidade de cartões',
+            selector: (row: any) => row.qtd_objs,
+            sortable: true
+            
+        },
+    ];
 
-            });
+    const data = [
+        {
+            id: 1,
+            title: 'Bdddeetlejuice',
+            year: '1988',
+        },
+        {
+            id: 2,
+            title: 'Ghostbusters',
+            year: '1984',
+        },
+
+        {
+            id: 3,
+            title: 'Beetlejuice',
+            year: '1988',
+        },
 
 
 
-    })
 
 
-    console.log(datas)
+
+    ]
+
+  useEffect(() => {
+ 
+         api.get('/production')
+             .then((data) => {
+                 setData(data.data)
+             }).catch((error) => {
+ 
+             });
+ 
+ 
+ 
+     }, [])  
+
+
+    console.log(datas) 
 
 
 
@@ -43,38 +110,17 @@ const PageHome: React.FC = () => {
                 <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
             </div>
 
+            {/* <Table data={datas}/> */}
 
-            <div className="container-table">
-
-                <div className="table">
-
-                    <div className="title-table">
-                        <h3>Em Produção</h3>
-                    </div>
-                    <div className="container-column-table">
-
-                        <div className="title-column">
-                            <span>Produto</span>
-                            <span>Número op</span>
-                            <span>Data</span>
-                            <span>Qtd Objs</span>
-                        </div>
-
-                        {datas &&
-                            datas.map((data: any) => (
-
-                                <div className="rows-table">
-                                    <span>Vero Card</span>
-                                    <span>111111</span>
-                                    <span>28/02/2023</span>
-                                    <span>9000</span>
-                                </div>
-
-                            ))
-                        }
-                    </div>
-
-                </div>
+            <div className="teste">
+                <h2>Em produção</h2>
+                <DataTable
+                    columns={columns}
+                    data={datas}
+                    striped={true}
+                    noDataComponent= 'Nenhum arquivo encontrado'
+                    pagination
+                />
 
             </div>
 
