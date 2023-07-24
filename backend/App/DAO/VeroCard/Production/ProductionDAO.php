@@ -20,7 +20,7 @@ class ProductionDAO extends Connection{
               WHEN a.idlayoutarquivo = 76 THEN 'TARJA'::text
               ELSE NULL::text
             END AS tipo,
-            a.dt_op,
+            to_char(a.dt_op, 'DD/MM/YYYY') AS dt_op,
             a.nr_lote,
             (
               SELECT ordem_producao_status.dt_finalizado
@@ -32,7 +32,7 @@ class ProductionDAO extends Connection{
      FROM ordem_producao a
           JOIN ordem_producao_status b ON a.id_op = b.id_op
           JOIN ordem_producao_detalhe c ON a.id_op = c.id_op 
-    WHERE a.id_cliente = 34 GROUP BY a.id_op , c.nome_arquivo,  a.qtd_objs ORDER BY a.dt_op DESC LIMIT 100;")  
+    WHERE a.id_cliente = 34 GROUP BY a.id_op , a.dt_op , c.nome_arquivo,  a.qtd_objs ORDER BY a.dt_op DESC LIMIT 100;")  
             ->fetchAll(\PDO::FETCH_ASSOC);
 
             return $products;

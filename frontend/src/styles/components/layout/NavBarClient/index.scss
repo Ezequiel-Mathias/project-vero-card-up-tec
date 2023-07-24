@@ -11,9 +11,18 @@ header {
     }
 
     nav {
-        width: 797px;
+        width: 100%;
         margin-right: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
 
+        .icon{
+            color: $color-white;
+            font-size: 35px;
+            cursor: pointer;
+        }
         ul {
             display: flex;
             list-style: none;
@@ -21,13 +30,13 @@ header {
             gap: 64px;
 
             li {
-                
+
                 font-weight: $font-semibold;
                 cursor: pointer;
 
-                a{
-                  text-decoration: none; 
-                  color: $color-white; 
+                a {
+                    text-decoration: none;
+                    color: $color-white;
                 }
             }
 
@@ -39,5 +48,44 @@ header {
                 margin-top: -3px;
             }
         }
+    }
+
+    @media(max-width: $breakpoint-laptop ) {
+        nav {
+
+            
+
+            .nav-list {
+                position: absolute;
+                top: 9vh;
+                height: 50vh;
+                width: max-content;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+                transform: translate(150%);
+
+                padding: 16px;
+                border-radius: 8px;
+                margin-right: 32px;
+
+                li {
+                    margin-right: 0px;
+                    
+
+                    a {
+                        color: $color-black;
+                    }
+
+                }
+            }
+
+            .nav-list.active {
+                transform: translateX(0);
+            }
+
+        }
+
+
     }
 }

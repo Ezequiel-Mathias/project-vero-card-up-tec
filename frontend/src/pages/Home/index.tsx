@@ -2,98 +2,67 @@ import React, { useEffect, useState } from "react";
 import api from "../../connectionAPI";
 import NavBarClient from "../../components/layout/NavBarClient";
 import { Link } from "react-router-dom";
-import Table from "../../components/layout/Table";
 import DataTable from 'react-data-table-component';
-
-
 
 
 const PageHome: React.FC = () => {
 
     const [datas, setData] = useState([]);
 
-    
 
     const columns: Array<Object> = [
         {
             name: 'Id op',
             selector: (row: any) => row.id_op,
-            sortable: true,
-            
+            sortable: true
         },
         {
             name: 'Nome do arquivo',
             selector: (row: any) => row.nome_arquivo,
-            
+
         },
         {
             name: 'Número de lote',
             selector: (row: any) => row.nr_lote,
-            
-            
+
+
         },
         {
             name: 'Tipo',
             selector: (row: any) => row.tipo
-            
+
         },
         {
             name: 'Data op',
             selector: (row: any) => row.dt_op
-            
+
         },
         {
             name: 'Quantidade de cartões',
             selector: (row: any) => row.qtd_objs,
             sortable: true
-            
+
         },
     ];
 
-    const data = [
-        {
-            id: 1,
-            title: 'Bdddeetlejuice',
-            year: '1988',
-        },
-        {
-            id: 2,
-            title: 'Ghostbusters',
-            year: '1984',
-        },
+    useEffect(() => {
 
-        {
-            id: 3,
-            title: 'Beetlejuice',
-            year: '1988',
-        },
+        api.get('/production')
+            .then((data) => {
+                setData(data.data)
+            }).catch((error) => {
+
+            });
 
 
 
+    }, [])
+
+    let data_americana = "2023-07-21 08:15:03.149:03";
+    let data_brasileira = data_americana.split('-').reverse().join('/');
 
 
-
-    ]
-
-  useEffect(() => {
- 
-         api.get('/production')
-             .then((data) => {
-                 setData(data.data)
-             }).catch((error) => {
- 
-             });
- 
- 
- 
-     }, [])  
-
-
-    console.log(datas) 
-
-
-
-
+    console.log(data_brasileira)
 
     return (
         <div className="container-page-home">
@@ -114,13 +83,19 @@ const PageHome: React.FC = () => {
 
             <div className="teste">
                 <h2>Em produção</h2>
-                <DataTable
-                    columns={columns}
-                    data={datas}
-                    striped={true}
-                    noDataComponent= 'Nenhum arquivo encontrado'
-                    pagination
-                />
+                <div className="container-teste">
+                    <DataTable
+                        columns={columns}
+                        data={datas}
+                        striped={true}
+                        responsive={true}
+
+                        noDataComponent='Nenhum arquivo encontrado'
+                        fixedHeader
+                        pagination
+                    />
+                </div>
+
 
             </div>
 
