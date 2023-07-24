@@ -10,15 +10,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: $base-font-family;
-    
+
 }
 
-body{
+body {
     &::-webkit-scrollbar {
         width: 8px;
         height: 10px;
     }
-    
+
     &::-webkit-scrollbar-track {
         background: transparent;
     }
@@ -47,18 +47,5 @@ body{
 
 @import "./components/shared/Input/index.scss";
 @import "./components/shared/Button/index.scss";
+@import "./components/shared/Table/index.scss";
 @import "./components/layout/NavBarClient/index.scss";
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,15 +2,18 @@ import React, { useEffect, useState } from "react";
 import api from "../../connectionAPI";
 import NavBarClient from "../../components/layout/NavBarClient";
 import { Link } from "react-router-dom";
-import DataTable from 'react-data-table-component';
+
+import Table from "../../components/shared/Table";
 
 
 const PageHome: React.FC = () => {
 
-    const [datas, setData] = useState([]);
+    const [inProductionData, setInProductionData] = useState([]);
+    const [awaitingReleaseData, setAwaitingRelease] = useState([]);
+    const [typeMessageInProduction , setTypeMessageInProduction] = useState(false);
+    const [typeMessageAwaitingRelease , setTypeMessageAwaitingRelease] = useState(false);
 
-
-    const columns: Array<Object> = [
+    const columnsInProduction: Array<Object> = [
         {
             name: 'Id op',
             selector: (row: any) => row.id_op,
@@ -41,28 +44,48 @@ const PageHome: React.FC = () => {
             name: 'Quantidade de cartões',
             selector: (row: any) => row.qtd_objs,
             sortable: true
+        },
+    ];
+
+    const columnsAwaitingRelease: Array<Object> = [
+        {
+            name: 'Ordem de produção',
+            selector: (row: any) => row.id_ordem_producao_status,
+            sortable: true
+        },
+        {
+            name: 'Id op',
+            selector: (row: any) => row.id_op
 
         },
+        {
+            name: 'Data de entrada',
+            selector: (row: any) => row.dt_status
+        },
+        {
+            name: 'Data de liberação',
+            selector: (row: any) => row.dt_finalizado
+        }
     ];
 
     useEffect(() => {
 
         api.get('/production')
             .then((data) => {
-                setData(data.data)
+                setInProductionData(data.data)
             }).catch((error) => {
 
             });
 
+        api.get('/awaiting-release')
+            .then((data) => {
+                setAwaitingRelease(data.data)
+            }).catch((error) => {
 
+            });
 
     }, [])
 
-    let data_americana = "2023-07-21 08:15:03.149:03";
-    let data_brasileira = data_americana.split('-').reverse().join('/');
-
-
-    console.log(data_brasileira)
 
     return (
         <div className="container-page-home">
@@ -79,27 +102,19 @@ const PageHome: React.FC = () => {
                 <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
             </div>
 
-            {/* <Table data={datas}/> */}
+            <Table
+                data={inProductionData}
+                column={columnsInProduction}
+                titleTable="Em produção"
+                typeMessage={typeMessageInProduction}
+            />
 
-            <div className="teste">
-                <h2>Em produção</h2>
-                <div className="container-teste">
-                    <DataTable
-                        columns={columns}
-                        data={datas}
-                        striped={true}
-                        responsive={true}
-
-                        noDataComponent='Nenhum arquivo encontrado'
-                        fixedHeader
-                        pagination
-                    />
-                </div>
-
-
-            </div>
-
-
+             <Table
+                data={awaitingReleaseData}
+                column={columnsAwaitingRelease}
+                titleTable="Aguardando liberação"
+                typeMessage={typeMessageAwaitingRelease}
+            /> 
         </div >
     )
 }

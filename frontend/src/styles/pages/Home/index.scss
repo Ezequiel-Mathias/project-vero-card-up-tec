@@ -1,100 +1,18 @@
 .container-page-home {
 
-
-
-
     .image-logo-up {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 64px;
+        margin-top: 128px;
+
+        img{
+            width: clamp( 6.7rem , 10vw , 7.688rem);
+        }
+        
     }
 
-
-
-
-    .teste {
-        margin-top: 70px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-weight: $font-semibold;
-
-        h2 {
-            border: solid 2px $color-black;
-            width: clamp(20rem , 90vw , 87.5rem);;
-            text-align: center;
-            margin-bottom: -0, 5px;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-        }
-
-
-        .sc-dmsloy {
-            width: clamp(20rem , 90vw , 87.5rem);
-            border: solid 2px $color-black;
-            border-top: hidden;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            max-height: 650px;
-
-            &::-webkit-scrollbar {
-                width: 8px;
-                height: 10px;
-            }
-            
-            &::-webkit-scrollbar-track {
-                background: transparent;
-            }
     
-            &::-webkit-scrollbar-thumb {
-                background-color: $color-gray;
-                border-radius: 20px;
-            }
-
-            .rdt_TableHeadRow {
-                font-size: 20px;
-                font-weight: $font-semibold;
-                text-align: center;
-
-                .sc-cseZMA {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    .sc-kDLnty{
-                        opacity: 1;
-                    } 
-                }
-            }
-
-            .rdt_TableRow {
-                font-size: 16px;
-                font-weight: $font-semibold;
-
-            }
-
-            .sc-jqNall {
-                .sc-hLljAB {
-                    div {
-                        width: 290px;
-                        text-align: center;
-                        white-space: normal;
-                        padding: 10px;
-                    }
-                }
-
-            }
-
-        }
-    }
-
-
-
-
-
-
 
 
 }
