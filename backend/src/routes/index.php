@@ -5,6 +5,7 @@ use function src\slimConfiguration;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Production\ProductionController;
 use App\Controllers\AwaitingRelease\AwaitingReleaseController;
+use App\Controllers\ProductionReport\ProductionReportController;
 use App\Middlewares\jwtDateTime;
 
 $app = new \Slim\App(slimConfiguration()); 
@@ -38,10 +39,16 @@ $app -> get('/awaiting-release' , AwaitingReleaseController::class . ':AwaitingR
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
-
 // ==================================================
 
 
+// ================== Production Report =============
+
+$app -> get('/production-report' , ProductionReportController::class . ':ProductionReport')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
+
+// ==================================================
 
 
 
