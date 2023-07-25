@@ -8,7 +8,7 @@ interface ITable {
     typeMessage : boolean
 }
 
-const Table: React.FC<ITable> = ({ data, column , titleTable}) => {
+const Table: React.FC<ITable> = ({ data, column , titleTable , typeMessage}) => {
 
     return (
         <div className="container-table">
@@ -18,7 +18,7 @@ const Table: React.FC<ITable> = ({ data, column , titleTable}) => {
                 data={data}
                 striped={true}
                 responsive={true}
-                noDataComponent='Nenhum arquivo encontrado'
+                noDataComponent={typeMessage ? 'Erro ao carregar os dados...' : 'Carregando...'}
                 fixedHeader={true}
                 pagination={true}
             />

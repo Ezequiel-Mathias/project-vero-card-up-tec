@@ -8,17 +8,18 @@
 
     h2 {
         border: solid 2px $color-black;
-        width: clamp(20rem , 90vw , 87.5rem);;
+        width: clamp(20rem, 90vw, 87.5rem);
+        ;
         text-align: center;
         margin-bottom: -0, 5px;
         border-top-left-radius: 16px;
         border-top-right-radius: 16px;
-        font-size: clamp( 1.25rem, 2vw , 1.5rem);
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
     }
 
 
     .sc-dmsloy {
-        width: clamp(20rem , 90vw , 87.5rem);
+        width: clamp(20rem, 90vw, 87.5rem);
         border: solid 2px $color-black;
         border-top: hidden;
         border-bottom-left-radius: 16px;
@@ -29,7 +30,7 @@
             width: 8px;
             height: 10px;
         }
-        
+
         &::-webkit-scrollbar-track {
             background: transparent;
         }
@@ -40,7 +41,7 @@
         }
 
         .rdt_TableHeadRow {
-            font-size: 20px;
+            font-size: clamp(1.10rem, 2vw, 1.25rem);
             font-weight: $font-semibold;
             text-align: center;
 
@@ -49,9 +50,9 @@
                 align-items: center;
                 justify-content: center;
 
-                .sc-kDLnty{
+                .sc-kDLnty {
                     opacity: 1;
-                } 
+                }
             }
         }
 
@@ -68,6 +69,7 @@
                     text-align: center;
                     white-space: normal;
                     padding: 10px;
+                    font-size: clamp( 0.875rem  , 2vw  , 1rem);
                 }
             }
 

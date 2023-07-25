@@ -73,45 +73,18 @@ const PageHome: React.FC = () => {
         api.get('/production')
             .then((data) => {
                 setInProductionData(data.data)
-            }).catch((error) => {
-
+            }).catch(() => {
+                setTypeMessageInProduction(true)
             });
 
         api.get('/awaiting-release')
             .then((data) => {
                 setAwaitingRelease(data.data)
-            }).catch((error) => {
-
+            }).catch(() => {
+                setTypeMessageAwaitingRelease(true)
             });
 
-    }, [])
-
-    //EXEMPLOSSS
-
-
-    const columns = [
-        {
-            name: 'Title',
-            selector: (row : any) => row.title,
-        },
-        {
-            name: 'Year',
-            selector: (row : any) => row.year,
-        },
-    ];
-    
-    const data = [
-        {
-            id: 1,
-            title: 'Beetlejuice',
-            year: '1988',
-        },
-        {
-            id: 2,
-            title: 'Ghostbusters',
-            year: '1984',
-        },
-    ]
+    }, []);
 
 
     return (
