@@ -5,6 +5,7 @@ import { useContext } from "react";
 import PageHome from '../pages/Home';
 
 
+
 const PublicRouter: React.FC = () => {
 
     const { authenticated, handleLogin }: any = useContext(Context);

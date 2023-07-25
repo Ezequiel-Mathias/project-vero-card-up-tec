@@ -1,49 +1,121 @@
-import React, { useContext } from "react";
-import { Context } from "../../AuthContext/AuthContext";
-import Button from "../../components/shared/Button";
+import React, { useEffect, useState } from "react";
+import api from "../../connectionAPI";
 import NavBarClient from "../../components/layout/NavBarClient";
+import { Link } from "react-router-dom";
+
+import Table from "../../components/shared/Table";
 
 
 const PageHome: React.FC = () => {
 
-    const { handleLogout }: any = useContext(Context);
+    const [inProductionData, setInProductionData] = useState([]);
+    const [awaitingReleaseData, setAwaitingRelease] = useState([]);
+    const [typeMessageInProduction , setTypeMessageInProduction] = useState(false);
+    const [typeMessageAwaitingRelease , setTypeMessageAwaitingRelease] = useState(false);
+
+    const columnsInProduction: Array<Object> = [
+        {
+            name: 'Id op',
+            selector: (row: any) => row.id_op,
+            sortable: true
+        },
+        {
+            name: 'Nome do arquivo',
+            selector: (row: any) => row.nome_arquivo,
+
+        },
+        {
+            name: 'Número de lote',
+            selector: (row: any) => row.nr_lote,
+
+
+        },
+        {
+            name: 'Tipo',
+            selector: (row: any) => row.tipo
+
+        },
+        {
+            name: 'Data op',
+            selector: (row: any) => row.dt_op
+
+        },
+        {
+            name: 'Quantidade de cartões',
+            selector: (row: any) => row.qtd_objs,
+            sortable: true
+        },
+    ];
+
+    const columnsAwaitingRelease: Array<Object> = [
+        {
+            name: 'Ordem de produção',
+            selector: (row: any) => row.id_ordem_producao_status,
+            sortable: true
+        },
+        {
+            name: 'Id op',
+            selector: (row: any) => row.id_op
+
+        },
+        {
+            name: 'Data de entrada',
+            selector: (row: any) => row.dt_status
+        },
+        {
+            name: 'Data de liberação',
+            selector: (row: any) => row.dt_finalizado
+        }
+    ];
+
+    useEffect(() => {
+
+        api.get('/production')
+            .then((data) => {
+                setInProductionData(data.data)
+            }).catch(() => {
+                setTypeMessageInProduction(true)
+            });
+
+        api.get('/awaiting-release')
+            .then((data) => {
+                setAwaitingRelease(data.data)
+            }).catch(() => {
+                setTypeMessageAwaitingRelease(true)
+            });
+
+    }, []);
+
 
     return (
         <div className="container-page-home">
-            
+
             <NavBarClient titles={
-                [ <a href="">Home</a> , 
-                <a href="">Relatorio de Produção</a> , 
-                <a href="">Estoque</a> , 
-                <a href="">Admin Users</a> , 
-                <a href="">Cartões Emitidos</a>]
-                }/>
+                [<Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link>,
+                <Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link>,
+                <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link>,
+                <Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link>,
+                <Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link>]
+            } />
 
             <div className="image-logo-up">
                 <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
             </div>
 
+            <Table
+                data={inProductionData}
+                column={columnsInProduction}
+                titleTable="Em produção"
+                typeMessage={typeMessageInProduction}
+            />
 
-            <div className="container-table">
-
-                <div className="table">
-                        
-                    <div className="title-table">
-                        <h3>Em Produção</h3>
-                    </div>
-                    <div className="column-table">
-                          <span>Produto</span>
-                          <span>Número op</span>
-                          <span>Data</span>
-                          <span>Qtd Objs</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
+             <Table
+                data={awaitingReleaseData}
+                column={columnsAwaitingRelease}
+                titleTable="Aguardando liberação"
+                typeMessage={typeMessageAwaitingRelease}
+            /> 
+        </div >
     )
 }
 

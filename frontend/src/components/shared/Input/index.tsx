@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import Icon from '../Icon';
 
-interface IInputProps extends React.HTMLProps<HTMLInputElement>{
+interface IInputProps extends React.HTMLProps<HTMLInputElement> {
     icon?: string,
     isPassword?: boolean,
     info?: string,
-    validate?: (name? : string) => boolean,
+    validate?: (name?: string) => boolean,
     value?: string
 }
 
 const Input: React.FC<IInputProps> = (props) => {
-    const [isValid , setValid] = useState(true);
-    const [textVisibility , setTextVisibility] = useState(false);
+
+    const [isValid, setValid] = useState(true);
+
+    const [textVisibility, setTextVisibility] = useState(false);
 
     const validade = () => {
-        if(!props.validate) return
+        if (!props.validate) return
         setValid(props.validate(props.name))
     }
 
@@ -22,24 +24,20 @@ const Input: React.FC<IInputProps> = (props) => {
 
     return (
         <div className="container-input">
-         <p>{props.info}</p>
-        <div className={`input ${!isValid ? 'error' : ''}`} onBlur={validade}>
-            <input value={props.value} type={ props.icon == "visibility" ? textVisibility === true ? 'text' : 'password' : 'text'} {...props} className={(props.icon) ? 'icon-input' : ''}></input>
-            {
-                props.icon == "visibility" ?
+            <p>{props.info}</p>
+            <div className={`input ${!isValid ? 'error' : ''}`} onBlur={validade}>
+                <input value={props.value} type={props.icon == "visibility" ? textVisibility === true ? 'text' : 'password' : 'text'} {...props} className={(props.icon) ? 'icon-input' : ''}></input>
+                {
+                    props.icon == "visibility" ?
 
-                <Icon name={textVisibility ? "visibility" : "visibility_off"} onClick={toggleVisibility}/>
+                        <Icon name={textVisibility ? "visibility" : "visibility_off"} onClick={toggleVisibility} />
 
-                :
-                props.icon && <Icon name={props.icon} />
-            }
-            
+                        :
+                        props.icon && <Icon name={props.icon} />
+                }
+
+            </div>
         </div>
-        
-        </div>
-        
-        
-
     )
 }
 

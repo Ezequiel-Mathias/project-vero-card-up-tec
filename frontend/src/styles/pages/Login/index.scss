@@ -187,14 +187,15 @@
         text-align: center;
         color: $color-white;
         font-weight: $font-bold;
-        
+
     }
 
-    @media(max-width: $breakpoint-small) , (max-height: $breakpoint-medium){
-        footer{
+    @media(max-width: $breakpoint-small),
+    (max-height: $breakpoint-medium) {
+        footer {
             display: none;
         }
     }
 
-    
+
 }

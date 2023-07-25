@@ -10,7 +10,23 @@
     padding: 0;
     box-sizing: border-box;
     font-family: $base-font-family;
-    
+
+}
+
+body {
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $color-gray;
+        border-radius: 20px;
+    }
 }
 
 
@@ -31,17 +47,5 @@
 
 @import "./components/shared/Input/index.scss";
 @import "./components/shared/Button/index.scss";
-@import "./components/layout/NavBarClient/index.scss"
-
-
-
-
-
-
-
-
-
-
-
-
-
+@import "./components/shared/Table/index.scss";
+@import "./components/layout/NavBarClient/index.scss";

@@ -3,9 +3,8 @@ import api from "../../connectionAPI";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+export function useAuth() {
 
-
-export default function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
 
     const navigate = useNavigate();
@@ -24,7 +23,7 @@ export default function useAuth() {
     }, [])
 
      const handleLogin = async (email? : string , senha? : string) => {
-        const data = await api.post('/login', {
+         await api.post('/login', {
             email: email,
             senha: senha
         }).then((data) => {
@@ -54,10 +53,15 @@ export default function useAuth() {
     }
 
     function handleLogout() {
+
         localStorage.removeItem('token');
+
         api.defaults.headers.Authorization = null;
+
         setAuthenticated(false);
+
         navigate(`${process.env.PUBLIC_URL}/`);
+
     }
 
     if (loading) {

@@ -4,40 +4,126 @@ header {
     justify-content: center;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    min-width: 100%;
+    top: 0%;
+    z-index: 10;
     height: 72px;
 
     .image-logo-client-white {
-        margin-left: 70px;
+        margin-left: clamp(1rem, 5vw, 4.375rem);
+
+        img{
+            width: clamp( 8rem , 13vw , 9.313rem);
+        }
+    }
+
+    li:hover {
+        cursor: pointer;
+        border-bottom: 3px solid $color-white;
+        transition: all 0.1s;
+        transform: scale(1.1);
+        margin-top: -3px;
     }
 
     nav {
-        width: 797px;
-        margin-right: 70px;
+        width: 100%;
+        margin-right: clamp(1rem, 5vw, 4.375rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: space-between;
+
+        .icon {
+            color: $color-white;
+            font-size: 35px;
+            cursor: pointer;
+            display: none;
+        }
 
         ul {
             display: flex;
             list-style: none;
             justify-content: end;
-            gap: 64px;
+
 
             li {
-                
+                margin-left: clamp(1rem, 4vw, 4rem);
                 font-weight: $font-semibold;
                 cursor: pointer;
+                font-size: clamp( 1rem , 1.2vw , 1.125rem);
+                
 
-                a{
-                  text-decoration: none; 
-                  color: $color-white; 
+                a {
+                    text-decoration: none;
+                    color: $color-white;
+                }
+            } 
+        }
+    }
+
+    @media(max-width: $breakpoint-laptop ) {
+
+        nav {
+
+            .icon {
+                display: block;
+            }
+
+            .nav-list {
+                display: none;
+            }
+        }
+    }
+
+    .container-sadbar {
+        width: 220px;
+        height: 100vh;
+        background-color: $color-client;
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        flex-direction: column;
+        font-weight: $font-semibold;
+        
+        .container-icon-close {
+            width: 100%;
+            padding: 16px;
+            display: flex;
+            justify-content: right;
+
+            .icon {
+                color: $color-white;
+                font-size: 35px;
+                cursor: pointer;
+
+            }
+
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 90%;
+
+            li {
+                font-weight: $font-semibold;
+                cursor: pointer;
+                list-style: none;
+
+                a {
+                    text-decoration: none;
+                    color: $color-white;
                 }
             }
+        }
+    }
 
-            li:hover {
-                cursor: pointer;
-                border-bottom: 3px solid $color-white;
-                transition: all 0.1s;
-                transform: scale(1.1);
-                margin-top: -3px;
-            }
+    @media(min-width: $breakpoint-laptop) {
+        .container-sadbar {
+            display: none;
         }
     }
 }

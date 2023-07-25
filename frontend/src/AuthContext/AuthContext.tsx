@@ -1,8 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
-import api from "../connectionAPI";
-import { useNavigate } from 'react-router-dom';
-import useAuth from './hooks/UseAuth';
-
+import { createContext} from 'react';
+import {useAuth} from './hooks/UseAuth';
 
 const Context = createContext({});
 
