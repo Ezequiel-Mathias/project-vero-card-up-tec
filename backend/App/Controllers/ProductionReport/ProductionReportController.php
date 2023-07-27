@@ -13,9 +13,8 @@ final class ProductionReportController
 
         $data = $request -> getParsedBody();
 
-        
 
-        if(!$data['ativo'] && !$data['desc_produto'] && !$data['cod_produto']){
+        if(empty(trim($data['ativo'])) && empty(trim($data['desc_produto'])) && empty(trim($data['cod_produto']))){
 
             try{
 
@@ -39,12 +38,27 @@ final class ProductionReportController
 
         $productionReportDAO = new ProductionReportDAO();
 
-        $productionReportModel -> setActive(strtoupper($data['ativo'])) -> setCodProduto($data['cod_produto']); 
+        $desc_product = str_replace("'", " ", $data['desc_produto']);
 
-        if($data['ativo'] && !$data['desc_produto'])
-            $data['desc_produto'] = 'null';
-        
-        $productionData = $productionReportDAO -> getAllProductionReport($productionReportModel , $data['desc_produto']);
+        $productionReportModel -> setActive(trim(strtoupper($data['ativo'])))
+        -> setCodProduto(trim($data['cod_produto'])); 
+
+
+        if(!empty(trim($data['desc_produto'])) && !empty(trim($data['cod_produto']))){
+
+            $productionData = $productionReportDAO -> FilterbyDescriptionProductsAndProductCode($productionReportModel , trim($desc_product));
+
+        }else if (!empty($data['ativo']) && !empty(trim($data['cod_produto'])) && empty(trim($desc_product))){
+
+            $productionData = $productionReportDAO -> FilterbyProductCode($productionReportModel);
+            
+        }else if(!empty(trim($desc_product)) && !empty($data['ativo'])){
+            
+            $productionData = $productionReportDAO -> FilterbyDescriptionProduto($productionReportModel , trim($desc_product));
+
+        }else{
+            $productionData = $productionReportDAO -> FilterbyActive($productionReportModel);
+        }
 
         $response = $response -> withJson($productionData);
       
