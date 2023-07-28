@@ -1,0 +1,22 @@
+.container-default-header{
+    margin-bottom: 64px;
+    .image-logo-up{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 128px;
+        
+
+        img{
+            width: clamp( 6rem , 10vw , 7.688rem);
+        }
+    }
+
+    .title-session{
+        margin-top: 64px;
+        h2 {
+            text-align: center;
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+        }
+    }
+}

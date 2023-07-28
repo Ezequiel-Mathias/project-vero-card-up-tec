@@ -1,3 +1,21 @@
-.exemple{
+.container-production-report{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    .container-inputs{
+        width: 100%;
+        margin-left: 70px;
+        margin-right: 70px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .inputs-date{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+    }
 }

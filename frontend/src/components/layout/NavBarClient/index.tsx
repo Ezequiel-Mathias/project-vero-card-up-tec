@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Icon from '../../shared/Icon';
+import { Link } from 'react-router-dom';
 
-interface INavBarClient {
-    titles: Array<any>
-}
-
-const NavBarClient: React.FC<INavBarClient> = ({ titles }) => {
+const NavBarClient: React.FC = () => {
 
     const [sideBar, setSideBar] = useState(false)
 
@@ -19,11 +16,11 @@ const NavBarClient: React.FC<INavBarClient> = ({ titles }) => {
                 </div>
                 <Icon name='menu' onClick={showSidebar} />
                 <ul className="nav-list">
-                    {
-                        titles.map((titles, index) => (
-                            <li key={index}>{titles}</li>
-                        ))
-                    }
+                    <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+                    <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+                    <li> <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
+                    <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link></li>
+                    <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
                 </ul>
             </nav>
 
@@ -35,11 +32,13 @@ const NavBarClient: React.FC<INavBarClient> = ({ titles }) => {
                         </div>
 
                         <ul className="nav-list">
-                            {
-                                titles.map((teste) => (
-                                    <li>{teste}</li>
-                                ))
-                            }
+                            <ul className="nav-list">
+                                <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+                                <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+                                <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
+                                <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link></li>
+                                <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
+                            </ul>
                         </ul>
                     </div>
 

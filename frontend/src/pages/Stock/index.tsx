@@ -1,11 +1,17 @@
 import React from "react";
+import DefaultHeader from "../../components/layout/DefaultHeader";
+import Input from "../../components/shared/Input";
 
 
 const PageStock: React.FC = () => {
     return (
-        <div>
-            <h1>Page Card estoque</h1>
-        </div>
+        <>
+            <DefaultHeader sessionTheme="Estoque"/>
+
+            <Input info="Ativo"/>
+            <Input info="Produto" placeholder="Produto..."/>
+            <Input info="Código do produto" placeholder="Código produto..."/>
+        </>
     )
 }
 

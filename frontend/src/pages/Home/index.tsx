@@ -4,6 +4,7 @@ import NavBarClient from "../../components/layout/NavBarClient";
 import { Link } from "react-router-dom";
 
 import Table from "../../components/shared/Table";
+import DefaultHeader from "../../components/layout/DefaultHeader";
 
 
 const PageHome: React.FC = () => {
@@ -90,17 +91,7 @@ const PageHome: React.FC = () => {
     return (
         <div className="container-page-home">
 
-            <NavBarClient titles={
-                [<Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link>,
-                <Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link>,
-                <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link>,
-                <Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link>,
-                <Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link>]
-            } />
-
-            <div className="image-logo-up">
-                <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
-            </div>
+            <DefaultHeader/>
 
             <Table
                 data={inProductionData}
