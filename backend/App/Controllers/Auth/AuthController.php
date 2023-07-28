@@ -19,7 +19,7 @@ final class AuthController
 
         $password = $data['senha'];
 
-        if(!$email || !$password){
+        if(!trim($email) || !$password){
             try{
 
                 throw new \Exception("O email e a senha não foi passado na requisição");

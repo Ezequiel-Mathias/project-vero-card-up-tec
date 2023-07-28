@@ -12,5 +12,5 @@ putenv('UPTECHNOLOGY1_PG_PASSWORD=');
 
 putenv('UPTECHNOLOGY1_PG_PORT=');
 
-
+putenv('JWT_SECRET_KEY=');
 ?>
