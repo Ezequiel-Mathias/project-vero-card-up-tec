@@ -1,7 +1,8 @@
 import React from "react";
-import NavBarClient from "../../components/layout/NavBarClient";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
+import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
+
 
 
 const PageProductionReport: React.FC = () => {
@@ -24,6 +25,8 @@ const PageProductionReport: React.FC = () => {
                     </div>
 
                 </div>
+
+                <DownloadFacilitators/>
             </div>
 
         </>

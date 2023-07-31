@@ -3,6 +3,8 @@
 
 @import "./vars.scss";
 
+
+
 // Project global stylizations
 
 * {
@@ -30,10 +32,6 @@ body {
 }
 
 
-
-
-
-
 // Pages
 
 @import "./pages/CardsIssued/index.scss";
@@ -50,3 +48,4 @@ body {
 @import "./components/shared/Table/index.scss";
 @import "./components/layout/NavBarClient/index.scss";
 @import "./components/layout/DefaultHeader/index.scss";
+@import "./components/layout/DownloadFacilitators/index.scss";

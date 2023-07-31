@@ -1,0 +1,24 @@
+.container-download-facilitators{
+    display: flex;
+    gap: 16px;
+
+    .container-icon{
+        width: 45px;
+        height: 45px;
+        background-color: $color-gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 100%;
+        
+        .icon{
+            color: $color-client;
+            font-size: 30px;
+        }
+    }
+
+    .container-icon:hover{
+        scale: (1.09);
+    }
+}

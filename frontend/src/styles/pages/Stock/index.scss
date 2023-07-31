@@ -1,3 +1,16 @@
-.exemple{
+.container-stock {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 70px;
+    padding-right: 70px;
 
+    .inputs-info-products {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
 }
