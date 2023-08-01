@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from "../../connectionAPI";
-import NavBarClient from "../../components/layout/NavBarClient";
-import { Link } from "react-router-dom";
-
 import Table from "../../components/shared/Table";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 

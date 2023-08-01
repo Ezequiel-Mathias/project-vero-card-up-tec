@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
 import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
-
-
+import Select from "../../components/shared/Select";
 
 const PageProductionReport: React.FC = () => {
+
+    const [formValues, setFormValues] = useState({
+        InitialProcessingDate: "",
+        FinalProcessingDate: "",
+        InitialShippingDate: "",
+        FinalShippingDate: ""
+    });
+
+    const handleChange = (e : any) => {
+        setFormValues({
+            ...formValues,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    
     return (
         <>
             <DefaultHeader sessionTheme="Relatorio de produção" />
@@ -13,20 +28,20 @@ const PageProductionReport: React.FC = () => {
             <div className="container-production-report">
                 <div className="container-inputs">
                     <Input placeholder='Arquivo...' info="Arquivo:" />
-
+                    
                     <div className="inputs-date">
-                        <Input placeholder="Data de processamento inicial..." info="Data de processamento inicial:" icon="calendar_month" />
-                        <Input placeholder="Data de processamento final..." info="Data de processamento final:" icon="calendar_month" />
+                        <Input type="date" name="InitialProcessingDate" info="Data de processamento inicial:" onChange={handleChange} />
+                        <Input type="date" name="FinalProcessingDate" info="Data de processamento final:" />
                     </div>
 
                     <div className="inputs-date">
-                        <Input placeholder="Data de expedição inicial..." info="Data de expedição inicial:" icon="calendar_month" />
-                        <Input placeholder="Data de expedição final..." info="Data de expedição final:" icon="calendar_month" />
+                        <Input type="date" name="InitialShippingDate" info="Data de expedição inicial:" />
+                        <Input type="date" name="FinalShippingDate" info="Data de expedição final:" />
                     </div>
 
                 </div>
 
-                <DownloadFacilitators/>
+                <DownloadFacilitators />
             </div>
 
         </>

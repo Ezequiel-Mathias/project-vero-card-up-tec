@@ -20,10 +20,6 @@ const PublicRouter: React.FC = () => {
                 !authenticated || authenticated ?
                     <Routes>
                         <Route index path={`${process.env.PUBLIC_URL}/`} element={<PageLoguin />} />
-                        < Route path={`${process.env.PUBLIC_URL}/relatorio-producao`} element={< PageProductionReport />} />
-                        < Route path={`${process.env.PUBLIC_URL}/estoque`} element={< PageStock />} />
-                        < Route path={`${process.env.PUBLIC_URL}/usuarios`} element={< PageUsers />} />
-                        < Route path={`${process.env.PUBLIC_URL}/emitidos`} element={< PageCardsIssued />} />
                         <Route path={`${process.env.PUBLIC_URL}*`} element={<Outlet/>} />
                     </Routes>
                     :

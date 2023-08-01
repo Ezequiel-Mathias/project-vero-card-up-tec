@@ -18,7 +18,7 @@ const Table: React.FC<ITable> = ({ data, column , titleTable , typeMessage}) => 
                 data={data}
                 striped={true}
                 responsive={true}
-                noDataComponent={typeMessage ? 'Erro ao carregar os dados...' : 'Carregando...'}
+                noDataComponent={typeMessage ? 'Erro ao carregar os dados...' :  'Nada a trazer...'}
                 fixedHeader={true}
                 pagination={true}
             />
