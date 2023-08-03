@@ -5,6 +5,8 @@ use function src\slimConfiguration;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Production\ProductionController;
 use App\Controllers\AwaitingRelease\AwaitingReleaseController;
+use App\Controllers\ProductionReport\ProductionReportController;
+use App\Controllers\Stock\StockController;
 use App\Middlewares\jwtDateTime;
 
 $app = new \Slim\App(slimConfiguration()); 
@@ -15,7 +17,7 @@ $app -> post('/login' , AuthController::class . ':login');
 
 $app -> post('/refresh-token' , AuthController::class . ':refreshToken');
 
-$app -> get('/decodfy' , function($request , $response) {
+$app -> post('/decodfy' , function($request , $response) {
     var_dump($request -> getAttribute('jwt'));
 }) -> add(new jwtDateTime())
 -> add(jwtAuth());
@@ -38,12 +40,25 @@ $app -> get('/awaiting-release' , AwaitingReleaseController::class . ':AwaitingR
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
+// ==================================================
+
+
+// ================== Production Report =============
+
+$app -> post('/production-report' , ProductionReportController::class . ':ProductionReport')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
 
 // ==================================================
 
 
+// ================== Stock =============
 
+$app -> post('/stock' , StockController::class . ':StockFilter')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
 
+// ==================================================
 
 $app -> run();
 
