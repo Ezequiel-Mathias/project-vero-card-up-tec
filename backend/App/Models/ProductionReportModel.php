@@ -7,53 +7,105 @@ final class ProductionReportModel
     /**
      * @var string
      */
-    private $active;
+    private $file;
+
+     /**
+     * @var string
+     */
+    private $cardType;
     /**
      * @var string
      */
-    private $desc_produto;
+    private $initialProcessinDate;
     /**
      * @var string
      */
-    private $cod_produto;
+    private $finalProcessinDate;
+    /**
+     * @var string
+     */
+    private $initialshippingdate;
+    /**
+     * @var string
+     */
+    private $finalshippingdate;
 
 
 
-    public function getActive(): string
+    public function getFile(): string
     {
-        return $this -> active;
+        return $this -> file;
     }
 
-    public function setActive(string $active): ProductionReportModel
+    public function setFile(string $file): ProductionReportModel
     {
 
-        $this -> active = $active;
+        $this -> file = $file;
 
         return $this;
     }
 
-    public function getDescProduto(): string
+    public function getCardType(): string
     {
-        return $this -> desc_produto;
+        return $this -> cardType;
     }
 
-    public function setDescProduto(string $desc_produto): ProductionReportModel
+    public function setCardType(string $cardType): ProductionReportModel
     {
 
-        $this-> desc_produto = $desc_produto;
+        $this -> cardType = $cardType;
 
         return $this;
     }
 
-    public function getCodProduto(): string
+    public function getInitialProcessinDate(): string
     {
-        return $this -> cod_produto;
+        return $this -> initialProcessinDate;
     }
 
-    public function setCodProduto(string $cod_produto): ProductionReportModel
+    public function setInitialProcessinDate(string $initialProcessinDate): ProductionReportModel
     {
 
-        $this-> cod_produto = $cod_produto;
+        $this-> initialProcessinDate = $initialProcessinDate;
+
+        return $this;
+    }
+
+    public function getFinalProcessinDate(): string
+    {
+        return $this -> finalProcessinDate;
+    }
+
+    public function setFinalProcessinDate(string $finalProcessinDate): ProductionReportModel
+    {
+
+        $this-> finalProcessinDate = $finalProcessinDate;
+
+        return $this;
+    }
+
+    public function getInitialshippingdate(): string
+    {
+        return $this -> initialshippingdate;
+    }
+
+    public function setInitialshippingdate(string $initialshippingdate): ProductionReportModel
+    {
+
+        $this-> initialshippingdate = $initialshippingdate;
+
+        return $this;
+    }
+
+    public function getfinalshippingdate(): string
+    {
+        return $this -> finalshippingdate;
+    }
+
+    public function setfinalshippingdate(string $finalshippingdate): ProductionReportModel
+    {
+
+        $this-> finalshippingdate = $finalshippingdate;
 
         return $this;
     }
