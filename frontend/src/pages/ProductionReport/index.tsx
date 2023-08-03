@@ -6,35 +6,48 @@ import Select from "../../components/shared/Select";
 
 const PageProductionReport: React.FC = () => {
 
+    const [teste, setTeste] = useState();
+
     const [formValues, setFormValues] = useState({
         InitialProcessingDate: "",
         FinalProcessingDate: "",
         InitialShippingDate: "",
-        FinalShippingDate: ""
+        FinalShippingDate: "",
+        cardType: ""
     });
 
-    const handleChange = (e : any) => {
+    const handleChange = (e: any) => {
         setFormValues({
             ...formValues,
             [e.target.name]: e.target.value
         })
     }
 
-    
+    console.log(formValues.cardType)
+
+
     return (
         <>
             <DefaultHeader sessionTheme="Relatorio de produção" />
 
             <div className="container-production-report">
                 <div className="container-inputs">
-                    <Input placeholder='Arquivo...' info="Arquivo:" />
-                    
-                    <div className="inputs-date">
+
+                    <div className="inputs">
+                        <Input placeholder='Arquivo...' info="Arquivo:" />
+                        <Select info={"Selecione o tipo de cartão:"} name="cardType" onChange={handleChange}>
+                            <option selected>Selecione um tipo...</option>
+                            <option value="Tarja">Tarja</option>
+                            <option value="Chip">Chip</option>
+                        </Select>
+                    </div>
+
+                    <div className="inputs">
                         <Input type="date" name="InitialProcessingDate" info="Data de processamento inicial:" onChange={handleChange} />
                         <Input type="date" name="FinalProcessingDate" info="Data de processamento final:" />
                     </div>
 
-                    <div className="inputs-date">
+                    <div className="inputs">
                         <Input type="date" name="InitialShippingDate" info="Data de expedição inicial:" />
                         <Input type="date" name="FinalShippingDate" info="Data de expedição final:" />
                     </div>
