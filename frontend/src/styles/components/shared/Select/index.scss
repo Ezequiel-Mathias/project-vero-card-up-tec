@@ -1,0 +1,26 @@
+.container-select {
+
+    p{
+        color: $color-client;
+        font-weight: $font-semibold;
+    }
+    select {
+        height: 54px;
+        width: clamp(19rem, 31vw, 24.375rem);
+        padding: 2px;
+        border-radius: 8px;
+        color: $color-black;
+        border: 2px $color-gray solid;
+        font-weight: $font-semibold;
+
+        &::-webkit-scrollbar {
+
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $color-client;
+            border-radius: 8px;
+        }
+    }
+}

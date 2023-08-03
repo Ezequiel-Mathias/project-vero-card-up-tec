@@ -115,7 +115,7 @@ const PageLoguin: React.FC = () => {
                     <div className="container-inputs-login">
 
                         <div className="input-name-user">
-                            <Input onKeyUp={onConfirmButtonPress} info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
+                            <Input placeholder="Email..." onKeyUp={onConfirmButtonPress} info="Email:" value={emailUserInput} onChange={(text: any) => setEmailUserInput(text.target.value)} validate={() => ValidateEmail()} />
                             <div className="message-error-verification">
                                 {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
                             </div>
@@ -124,7 +124,7 @@ const PageLoguin: React.FC = () => {
 
                         <div className="input-password-user">
 
-                            <Input onKeyUp={onConfirmButtonPress} info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} validate={() => ValidatePassword()} />
+                            <Input placeholder="Senha..." onKeyUp={onConfirmButtonPress} info="Senha:" icon="visibility" onChange={(text: any) => setPasswordUserInput(text.target.value)} validate={() => ValidatePassword()} />
 
                             <div className="message-error-verification">
 
@@ -137,11 +137,8 @@ const PageLoguin: React.FC = () => {
                         <Button text="Entrar" onClick={onConfirmButtonPress} />
 
                     </div>
-
                 </div>
-
             </div>
-
             <footer><p>Copyright 2023 © | Up Technology by Ezequiel Mathias</p></footer>
 
         </div>

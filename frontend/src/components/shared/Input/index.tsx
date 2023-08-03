@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Icon from '../Icon';
 
 interface IInputProps extends React.HTMLProps<HTMLInputElement> {
-    icon?: string,
-    isPassword?: boolean,
-    info?: string,
-    validate?: (name?: string) => boolean,
+    icon?: string
+    isPassword?: boolean
+    info?: string
+    validate?: (name?: string) => boolean
+    placeholder?: string
     value?: string
 }
 
@@ -26,7 +27,7 @@ const Input: React.FC<IInputProps> = (props) => {
         <div className="container-input">
             <p>{props.info}</p>
             <div className={`input ${!isValid ? 'error' : ''}`} onBlur={validade}>
-                <input value={props.value} type={props.icon == "visibility" ? textVisibility === true ? 'text' : 'password' : 'text'} {...props} className={(props.icon) ? 'icon-input' : ''}></input>
+                <input placeholder={props.placeholder} value={props.value} type={props.icon == "visibility" ? textVisibility === true ? 'text' : 'password' : 'text'} {...props} className={(props.icon) ? 'icon-input' : ''}></input>
                 {
                     props.icon == "visibility" ?
 
