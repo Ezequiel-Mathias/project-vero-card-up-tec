@@ -13,8 +13,15 @@ final class ProductionReportController
 
         $data = $request -> getParsedBody();
 
-        var_dump($data['arquivo'] , $data['tipo'] , $data['dataInicial'] , $data['dataFinal'] , $data['expedicaoInicial'] , $data['expedicaoFinal']);
-        $response = $response -> withJson('');
+        $productionReportDAO = new ProductionReportDAO();
+
+        if(!empty(trim($data['arquivo']))){
+            $productionReport = $productionReportDAO -> getProductionReportFilterFileDAO($data['arquivo']);
+        }
+
+        
+
+        $response = $response -> withJson($productionReport);
       
         return $response;
     }
