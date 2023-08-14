@@ -11,9 +11,21 @@ final class ProductionReportController
     public function ProductionReport(Request $request, Response $response, array $args): Response
     {
 
-        
+        $data = $request -> getParsedBody();
 
-        $response = $response -> withJson('testando mane');
+        $productionReportModel = new ProductionReportModel(); 
+
+        $productionReportDAO = new ProductionReportDAO();
+
+        $productionReportModel -> setFile(trim($data['arquivo'])) -> setCardType(trim($data['tipo']))
+         -> setInitialProcessinDate(trim($data['dataInicial'])) -> setFinalProcessinDate(trim($data['expedicaoInicial']))
+          -> setInitialshippingdate(trim($data['expedicaoFinal']));
+
+        if(!empty(trim($data['arquivo']))){
+            $productionReport = $productionReportDAO -> getProductionReportFilterFileDAO($data['arquivo']);
+        }
+
+        $response = $response -> withJson($productionReport);
       
         return $response;
     }

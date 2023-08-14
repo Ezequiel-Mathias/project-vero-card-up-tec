@@ -8,7 +8,7 @@ use Slim\Http\Response as Response;
 
 final class AwaitingReleaseController
 {   
-
+    
     public function AwaitingRelease(Request $request, Response $response, array $args): Response
     {
         
@@ -19,8 +19,6 @@ final class AwaitingReleaseController
         $response = $response -> withJson($production);
 
         return $response;
-        
-        
-        return $response; 
+    
     }
 }

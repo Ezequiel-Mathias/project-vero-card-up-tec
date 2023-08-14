@@ -2,6 +2,7 @@
 
 use function src\jwtAuth;
 use function src\slimConfiguration;
+use App\Controllers\AdminUsers\AdminUsersController;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\Production\ProductionController;
 use App\Controllers\AwaitingRelease\AwaitingReleaseController;
@@ -58,6 +59,27 @@ $app -> post('/stock' , StockController::class . ':StockFilter')
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
+// ==================================================
+
+
+
+// ================== Users =============
+
+$app -> get('/users' , AdminUsersController::class . ':getUsers')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
+
+$app -> post('/users' , AdminUsersController::class . ':createUsers')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
+
+$app -> put('/users' , AdminUsersController::class . ':editUsers')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
+
+$app -> delete('/users' , AdminUsersController::class . ':deleteUsers')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
 // ==================================================
 
 $app -> run();

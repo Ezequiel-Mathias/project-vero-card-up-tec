@@ -11,7 +11,7 @@ class StockDAO extends Connection{
         parent::__construct();
     }
 
-    public function FilterbyDescriptionProductsAndProductCode(StockModel $productionReport , string $desc_produto) : array {
+    public function FilterbyDescriptionProductsAndProductCode(StockModel $stockModel , string $desc_produto) : array {
 
         $statement = $this -> pdo
         ->prepare("SELECT desc_produto , 
@@ -23,7 +23,7 @@ class StockDAO extends Connection{
         , qtd_entrada
         , media FROM view_verocard_estoque WHERE ativo=:ativo AND desc_produto ILIKE '%".$desc_produto."%' AND  cod_produto = :cod_produto LIMIT 10;");
         
-        $statement -> execute(['ativo' => $productionReport -> getActive(), 'cod_produto' => $productionReport -> getCodProduto()]);
+        $statement -> execute(['ativo' => $stockModel -> getActive(), 'cod_produto' => $stockModel -> getCodProduto()]);
 
         $response = $statement -> fetchAll(\PDO::FETCH_ASSOC);
         
@@ -31,7 +31,7 @@ class StockDAO extends Connection{
     }
 
 
-    public function FilterbyProductCode(StockModel $productionReport) : array {
+    public function FilterbyProductCode(StockModel $stockModel) : array {
 
         $statement = $this -> pdo
         ->prepare("SELECT desc_produto , 
@@ -43,7 +43,7 @@ class StockDAO extends Connection{
         , qtd_entrada
         , media FROM view_verocard_estoque WHERE ativo=:ativo AND  cod_produto = :cod_produto LIMIT 10;");
         
-        $statement -> execute(['ativo' => $productionReport -> getActive(), 'cod_produto' => $productionReport -> getCodProduto()]);
+        $statement -> execute(['ativo' => $stockModel -> getActive(), 'cod_produto' => $stockModel -> getCodProduto()]);
 
         $response = $statement -> fetchAll(\PDO::FETCH_ASSOC);
         
@@ -51,7 +51,7 @@ class StockDAO extends Connection{
     }
 
 
-    public function FilterbyDescriptionProduto(StockModel $productionReport , string $desc_produto): array {
+    public function FilterbyDescriptionProduto(StockModel $stockModel , string $desc_produto): array {
 
         $statement = $this -> pdo
         ->prepare("SELECT desc_produto , 
@@ -63,14 +63,14 @@ class StockDAO extends Connection{
         , qtd_entrada
         , media FROM view_verocard_estoque WHERE ativo=:ativo AND desc_produto ILIKE '%".$desc_produto."%'");
         
-        $statement -> execute(['ativo' => $productionReport -> getActive()]);
+        $statement -> execute(['ativo' => $stockModel -> getActive()]);
 
         $response = $statement -> fetchAll(\PDO::FETCH_ASSOC);
         
         return $response;
     }
 
-    public function FilterbyActive(StockModel $productionReport) : array {
+    public function FilterbyActive(StockModel $stockModel) : array {
 
         $statement = $this -> pdo
         ->prepare("SELECT desc_produto , 
@@ -82,7 +82,7 @@ class StockDAO extends Connection{
         , qtd_entrada
         , media FROM view_verocard_estoque WHERE ativo=:ativo ");
         
-        $statement -> execute(['ativo' => $productionReport -> getActive()]);
+        $statement -> execute(['ativo' => $stockModel -> getActive()]);
 
         $response = $statement -> fetchAll(\PDO::FETCH_ASSOC);
         
