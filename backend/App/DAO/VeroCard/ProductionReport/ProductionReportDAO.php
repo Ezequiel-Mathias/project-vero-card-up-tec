@@ -13,12 +13,13 @@ class ProductionReportDAO extends Connection
         parent::__construct();
     }
 
-    public function getProductionReportFilterFileDAO( string $file) 
+    public function getProductionReportFilterFileDAO(ProductionReportModel $productionReportModel): array
     {
 
         $statement = $this->pdo
-            ->query("SELECT * from view_verocard_producao_tarja WHERE nome_arquivo_proc = ");
+            ->query("SELECT * from view_verocard_producao_tarja WHERE nome_arquivo_proc = :arquivo ");
 
+        $statement->execute(['arquivo' => $productionReportModel-> getFile()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
