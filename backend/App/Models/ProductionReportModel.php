@@ -84,12 +84,12 @@ final class ProductionReportModel
         return $this;
     }
 
-    public function getInitialshippingdate(): string
+    public function getInitialShippingdate(): string
     {
         return $this -> initialshippingdate;
     }
 
-    public function setInitialshippingdate(string $initialshippingdate): ProductionReportModel
+    public function setInitialShippingdate(string $initialshippingdate): ProductionReportModel
     {
 
         $this-> initialshippingdate = $initialshippingdate;
@@ -97,14 +97,13 @@ final class ProductionReportModel
         return $this;
     }
 
-    public function getfinalshippingdate(): string
+    public function getFinalShippingdate(): string
     {
         return $this -> finalshippingdate;
     }
 
-    public function setfinalshippingdate(string $finalshippingdate): ProductionReportModel
+    public function setFinalShippingdate(string $finalshippingdate): ProductionReportModel
     {
-
         $this-> finalshippingdate = $finalshippingdate;
 
         return $this;

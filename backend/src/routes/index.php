@@ -77,9 +77,10 @@ $app -> put('/users' , AdminUsersController::class . ':editUsers')
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
-$app -> delete('/users' , AdminUsersController::class . ':deleteUsers')
+$app -> delete('/users/{id}' , AdminUsersController::class . ':deleteUsers')
 -> add(new jwtDateTime())
 -> add(jwtAuth());
+
 // ==================================================
 
 $app -> run();
