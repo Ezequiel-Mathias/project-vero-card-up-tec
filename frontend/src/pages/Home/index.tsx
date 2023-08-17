@@ -8,8 +8,8 @@ const PageHome: React.FC = () => {
 
     const [inProductionData, setInProductionData] = useState([]);
     const [awaitingReleaseData, setAwaitingRelease] = useState([]);
-    const [typeMessageInProduction , setTypeMessageInProduction] = useState(false);
-    const [typeMessageAwaitingRelease , setTypeMessageAwaitingRelease] = useState(false);
+    const [typeMessageInProduction, setTypeMessageInProduction] = useState(false);
+    const [typeMessageAwaitingRelease, setTypeMessageAwaitingRelease] = useState(false);
 
     const columnsInProduction: Array<Object> = [
         {
@@ -68,19 +68,24 @@ const PageHome: React.FC = () => {
 
     useEffect(() => {
 
-        api.get('/production')
-            .then((data) => {
-                setInProductionData(data.data)
-            }).catch(() => {
-                setTypeMessageInProduction(true)
-            });
+        const HomePageRequests = async () => {
+            await api.get('/production')
+                .then((data) => {
+                    setInProductionData(data.data)
+                }).catch(() => {
+                    setTypeMessageInProduction(true)
+                });
 
-        api.get('/awaiting-release')
-            .then((data) => {
-                setAwaitingRelease(data.data)
-            }).catch(() => {
-                setTypeMessageAwaitingRelease(true)
-            });
+            await api.get('/awaiting-release')
+                .then((data) => {
+                    setAwaitingRelease(data.data)
+                }).catch(() => {
+                    setTypeMessageAwaitingRelease(true)
+                });
+        }
+
+        HomePageRequests()
+
 
     }, []);
 
@@ -88,7 +93,7 @@ const PageHome: React.FC = () => {
     return (
         <div className="container-page-home">
 
-            <DefaultHeader/>
+            <DefaultHeader />
 
             <Table
                 data={inProductionData}
@@ -97,12 +102,12 @@ const PageHome: React.FC = () => {
                 typeMessage={typeMessageInProduction}
             />
 
-             <Table
+            <Table
                 data={awaitingReleaseData}
                 column={columnsAwaitingRelease}
                 titleTable="Aguardando liberação"
                 typeMessage={typeMessageAwaitingRelease}
-            /> 
+            />
         </div >
     )
 }
