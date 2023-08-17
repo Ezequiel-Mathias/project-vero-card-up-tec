@@ -1,9 +1,9 @@
 <?php
-    namespace App\Controllers\Stock;
 
-use App\DAO\VeroCard\Stock\StockDAO;
-use App\Models\StockModel;
-use Psr\Http\Message\ServerRequestInterface as Request;
+    namespace App\Controllers\Stock;
+    use App\DAO\VeroCard\Stock\StockDAO;
+    use App\Models\StockModel;
+    use Psr\Http\Message\ServerRequestInterface as Request;
     use Slim\Http\Response as Response;
 
     final class StockController
@@ -67,4 +67,3 @@ use Psr\Http\Message\ServerRequestInterface as Request;
         }
 
     }
-?>
