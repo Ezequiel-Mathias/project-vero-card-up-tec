@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 interface ITable {
     data: Array<Object>
     column: Array<Object>
-    titleTable: string
+    titleTable?: string
     typeMessage : boolean
 }
 

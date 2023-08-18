@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
 import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Select from "../../components/shared/Select";
+import api from "../../connectionAPI";
+import Table from "../../components/shared/Table";
+import Button from "../../components/shared/Button";
+import Swal from "sweetalert2";
 
 const PageProductionReport: React.FC = () => {
 
-    const [teste, setTeste] = useState();
+    const [ProductionReportData, setProductionReportData] = useState([]);
+    const [ProductionReportMessage, setProductionReportMessage] = useState(false);
 
     const [formValues, setFormValues] = useState({
+
+        fileName: "",
         InitialProcessingDate: "",
         FinalProcessingDate: "",
         InitialShippingDate: "",
         FinalShippingDate: "",
         cardType: ""
+
     });
 
     const handleChange = (e: any) => {
@@ -23,8 +31,78 @@ const PageProductionReport: React.FC = () => {
         })
     }
 
-    console.log(formValues.cardType)
+    const columnsProductionReport: Array<Object> = [
+        {
+            name: 'Código do produto',
+            selector: (row: any) => row.cod_produto,
+            sortable: true
+        },
+        {
+            name: 'Descrição do produto',
+            selector: (row: any) => row.desc_produto
+        },
+        {
+            name: 'Data de processamento',
+            selector: (row: any) => row.dt_processamento
+        },
+        {
+            name: 'Data de expedição',
+            selector: (row: any) => row.dt_expedicao
+        },
+        {
+            name: 'Nome do arquivo',
+            selector: (row: any) => row.nome_arquivo_proc
+        },
+        {
+            name: 'Total de cartões',
+            selector: (row: any) => row.total_cartoes
+        },
+        {
+            name: 'Status',
+            selector: (row: any) => row.status
+        }
+    ];
 
+
+
+    const ProductionReportRequests =  async () => {
+
+        if(formValues.cardType === 'Tarja' || formValues.cardType === 'Chip') {
+
+            if(formValues.InitialProcessingDate < formValues.FinalProcessingDate && formValues.InitialShippingDate < formValues.FinalShippingDate) {
+                await api.post('/production-report', {
+                    arquivo: formValues.fileName,
+                    tipo: formValues.cardType,
+                    dataInicial: formValues.InitialProcessingDate,
+                    dataFinal: formValues.FinalProcessingDate,
+                    expedicaoInicial: formValues.InitialShippingDate,
+                    expedicaoFinal: formValues.FinalShippingDate
+                }).then((data) => {
+        
+                    setProductionReportData(data.data)
+        
+                    console.log(data.data)
+        
+                }).catch(() => {
+                    setProductionReportMessage(true)
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Datas incorretas...',
+                    text: 'A data inicial não pode ser menor que a final.',
+                  });
+            }
+            
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Selecione um tipo de cartão...',
+                text: 'Selecione tarja ou chip antes de fazer a filtragem de dados',
+              });
+        }
+         
+    }
 
     return (
         <>
@@ -34,27 +112,46 @@ const PageProductionReport: React.FC = () => {
                 <div className="container-inputs">
 
                     <div className="inputs">
-                        <Input placeholder='Arquivo...' info="Arquivo:" />
+
+                        <Input name="fileName" placeholder='Arquivo...' info="Arquivo:" onChange={handleChange} />
+
                         <Select info={"Selecione o tipo de cartão:"} name="cardType" onChange={handleChange}>
                             <option selected>Selecione um tipo...</option>
                             <option value="Tarja">Tarja</option>
                             <option value="Chip">Chip</option>
                         </Select>
+
                     </div>
 
                     <div className="inputs">
                         <Input type="date" name="InitialProcessingDate" info="Data de processamento inicial:" onChange={handleChange} />
-                        <Input type="date" name="FinalProcessingDate" info="Data de processamento final:" />
+                        <Input type="date" name="FinalProcessingDate" info="Data de processamento final:" onChange={handleChange} />
                     </div>
 
                     <div className="inputs">
-                        <Input type="date" name="InitialShippingDate" info="Data de expedição inicial:" />
-                        <Input type="date" name="FinalShippingDate" info="Data de expedição final:" />
+                        <Input type="date" name="InitialShippingDate" info="Data de expedição inicial:" onChange={handleChange} />
+                        <Input type="date" name="FinalShippingDate" info="Data de expedição final:" onChange={handleChange} />
                     </div>
 
                 </div>
 
+
+                {
+                    ProductionReportData.length >= 1 &&
+                    <Table
+                        column={columnsProductionReport}
+                        data={ProductionReportData ?  ProductionReportData : []}
+                        typeMessage={true}
+                    />
+                }
+
+
+                <Button text="Pesquisar" onClick={() => ProductionReportRequests()}/>
+
                 <DownloadFacilitators />
+
+
+
             </div>
 
         </>

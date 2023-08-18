@@ -77,7 +77,7 @@ const PageHome: React.FC = () => {
                 });
 
             await api.get('/awaiting-release')
-                .then((data) => {
+                .then((data) => {                          
                     setAwaitingRelease(data.data)
                 }).catch(() => {
                     setTypeMessageAwaitingRelease(true)
