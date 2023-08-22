@@ -12,7 +12,7 @@ const PageProductionReport: React.FC = () => {
 
     const [ProductionReportData, setProductionReportData] = useState([]);
     const [ProductionReportMessage, setProductionReportMessage] = useState(false);
-
+    const [Teste, setTeste] = useState([])
     const [formValues, setFormValues] = useState({
 
         fileName: "",
@@ -63,13 +63,33 @@ const PageProductionReport: React.FC = () => {
         }
     ];
 
+    useEffect(() => {
+
+        const HomePageRequests = async () => {
 
 
-    const ProductionReportRequests =  async () => {
 
-        if(formValues.cardType === 'Tarja' || formValues.cardType === 'Chip') {
+            await api.get('/teste')
+                .then((data) => {
+                    setTeste(data.data)
+                }).catch(() => {
 
-            if(formValues.InitialProcessingDate < formValues.FinalProcessingDate && formValues.InitialShippingDate < formValues.FinalShippingDate) {
+                });
+        }
+
+        HomePageRequests()
+
+    }, []);
+
+
+
+    const ProductionReportRequests = async () => {
+
+        if (formValues.cardType === 'Tarja' || formValues.cardType === 'Chip') {
+
+            if (formValues.InitialProcessingDate < formValues.FinalProcessingDate
+                || formValues.InitialShippingDate < formValues.FinalShippingDate
+                || formValues.fileName) {
                 await api.post('/production-report', {
                     arquivo: formValues.fileName,
                     tipo: formValues.cardType,
@@ -78,31 +98,32 @@ const PageProductionReport: React.FC = () => {
                     expedicaoInicial: formValues.InitialShippingDate,
                     expedicaoFinal: formValues.FinalShippingDate
                 }).then((data) => {
-        
+
                     setProductionReportData(data.data)
-        
+
                     console.log(data.data)
-        
+
                 }).catch(() => {
                     setProductionReportMessage(true)
                 });
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Datas incorretas...',
                     text: 'A data inicial não pode ser menor que a final.',
-                  });
+                });
             }
-            
-        }else{
+
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Selecione um tipo de cartão...',
                 text: 'Selecione tarja ou chip antes de fazer a filtragem de dados',
-              });
+            });
         }
-         
+
     }
+
 
     return (
         <>
@@ -138,17 +159,21 @@ const PageProductionReport: React.FC = () => {
 
                 {
                     ProductionReportData.length >= 1 &&
-                    <Table
+
+                    < Table
                         column={columnsProductionReport}
-                        data={ProductionReportData ?  ProductionReportData : []}
+                        data={ProductionReportData}
                         typeMessage={true}
                     />
+                    
                 }
 
 
-                <Button text="Pesquisar" onClick={() => ProductionReportRequests()}/>
 
-                <DownloadFacilitators />
+
+                <Button text="Pesquisar" onClick={() => ProductionReportRequests()} />
+
+                <DownloadFacilitators printClick={() => window.print()} />
 
 
 

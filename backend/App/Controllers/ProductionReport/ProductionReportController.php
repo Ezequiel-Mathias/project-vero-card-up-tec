@@ -56,28 +56,28 @@ final class ProductionReportController
 
             if (!empty(trim($data['arquivo']))) {
 
-                $productionReport = $productionReportDAO->getProductionReportFilterFileDAO($productionReportModel);
+                $productionReport = $productionReportDAO->getProductionReportFilterFileTarjaDAO($productionReportModel);
 
             } else if (
                 !empty(trim($data['dataInicial'])) && !empty(trim($data['dataFinal']))
                 && empty(trim($data['expedicaoInicial'])) && empty(trim($data['expedicaoFinal']))
             ) {
 
-                $productionReport = $productionReportDAO->getProductionReportFilterDateDAO($productionReportModel);
+                $productionReport = $productionReportDAO->getProductionReportFilterDateTarjaDAO($productionReportModel);
 
             } else if (
                 !empty(trim($data['expedicaoInicial'])) && !empty(trim($data['expedicaoFinal']))
                 && empty(trim($data['dataInicial'])) && empty(trim($data['dataFinal']))
             ) {
 
-                $productionReport = $productionReportDAO->getProductionReportFilterShippingDAO($productionReportModel);
+                $productionReport = $productionReportDAO->getProductionReportFilterShippingTarjaDAO($productionReportModel);
 
             } else if (
                 !empty(trim($data['expedicaoInicial'])) && !empty(trim($data['expedicaoFinal']))
                 && !empty(trim($data['dataInicial'])) && !empty(trim($data['dataFinal']))
             ) {
 
-                $productionReport = $productionReportDAO->getProductionReportFilterDatesInGeneralDAO($productionReportModel);
+                $productionReport = $productionReportDAO->getProductionReportFilterDatesInGeneralTarjaDAO($productionReportModel);
 
             } else {
 
@@ -86,12 +86,54 @@ final class ProductionReportController
             }
 
         } else if (!empty(trim($data['tipo'])) &&  $data['tipo']  === 'Chip') {
+            
+            if (!empty(trim($data['arquivo']))) {
 
-            print('esse é Chip');
+                $productionReport = $productionReportDAO->getProductionReportFilterFileChipDAO($productionReportModel);
+
+            } else if (
+                !empty(trim($data['dataInicial'])) && !empty(trim($data['dataFinal']))
+                && empty(trim($data['expedicaoInicial'])) && empty(trim($data['expedicaoFinal']))
+            ) {
+
+                $productionReport = $productionReportDAO->getProductionReportFilterDateChipDAO($productionReportModel);
+
+            } else if (
+                !empty(trim($data['expedicaoInicial'])) && !empty(trim($data['expedicaoFinal']))
+                && empty(trim($data['dataInicial'])) && empty(trim($data['dataFinal']))
+            ) {
+
+                $productionReport = $productionReportDAO->getProductionReportFilterShippingChipDAO($productionReportModel);
+
+            } else if (
+                !empty(trim($data['expedicaoInicial'])) && !empty(trim($data['expedicaoFinal']))
+                && !empty(trim($data['dataInicial'])) && !empty(trim($data['dataFinal']))
+            ) {
+
+                $productionReport = $productionReportDAO->getProductionReportFilterDatesInGeneralChipDAO($productionReportModel);
+
+            } else {
+
+                $productionReport = "Preencha os campos corretamente!";
+
+            }
         }
 
         $response = $response->withJson($productionReport);
 
         return $response;
     }
+
+    public function Teste(Request $request, Response $response, array $args): Response
+    {
+
+        $productionReportDAO = new ProductionReportDAO();
+
+        $productionReport = $productionReportDAO->TESTE();
+
+        $response = $response->withJson($productionReport);
+
+        return $response;
+    }
+
 }

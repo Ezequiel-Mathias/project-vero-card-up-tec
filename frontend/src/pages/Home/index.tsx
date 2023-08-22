@@ -69,6 +69,7 @@ const PageHome: React.FC = () => {
     useEffect(() => {
 
         const HomePageRequests = async () => {
+
             await api.get('/production')
                 .then((data) => {
                     setInProductionData(data.data)
@@ -84,11 +85,9 @@ const PageHome: React.FC = () => {
                 });
         }
 
-        HomePageRequests()
-
+       HomePageRequests()
 
     }, []);
-
 
     return (
         <div className="container-page-home">

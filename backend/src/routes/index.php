@@ -83,6 +83,15 @@ $app -> delete('/users/{id}' , AdminUsersController::class . ':deleteUsers')
 
 // ==================================================
 
+
+// ================== ROTA DE TESTES =============
+
+$app -> get('/teste' , ProductionReportController::class . ':Teste')
+-> add(new jwtDateTime())
+-> add(jwtAuth());
+
+// ==================================================
+
 $app -> run();
 
 ?>
