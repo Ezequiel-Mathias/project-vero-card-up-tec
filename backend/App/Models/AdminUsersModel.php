@@ -21,7 +21,7 @@ final class AdminUsersModel
      * @var string
      */
     private $senha;
-
+     
 
     public function getId(): string
     {
@@ -73,4 +73,6 @@ final class AdminUsersModel
 
         return $this;
     }
+
+    
 }

@@ -16,9 +16,14 @@ class ProductionReportDAO extends Connection
     public function getProductionReportFilterFileTarjaDAO(ProductionReportModel $productionReportModel): array
     {
 
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_tarja WHERE nome_arquivo_proc = :arquivo");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status from view_verocard_producao_tarja WHERE nome_arquivo_proc = :arquivo");
 
-        $statement->execute(['arquivo' => $productionReportModel-> getFile()]);
+        $statement->execute(['arquivo' => $productionReportModel->getFile()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -28,9 +33,14 @@ class ProductionReportDAO extends Connection
     public function getProductionReportFilterDateTarjaDAO(ProductionReportModel $productionReportModel): array
     {
 
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_tarja where dt_processamento BETWEEN :datainicial AND :datafinal ;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status from view_verocard_producao_tarja where dt_processamento BETWEEN :datainicial AND :datafinal ;");
 
-        $statement->execute(['datainicial' => $productionReportModel-> getInitialProcessinDate() , 'datafinal' => $productionReportModel-> getFinalProcessinDate() ]);
+        $statement->execute(['datainicial' => $productionReportModel->getInitialProcessinDate(), 'datafinal' => $productionReportModel->getFinalProcessinDate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -39,9 +49,14 @@ class ProductionReportDAO extends Connection
 
     public function getProductionReportFilterShippingTarjaDAO(ProductionReportModel $productionReportModel): array
     {
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_tarja where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal ;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status from view_verocard_producao_tarja where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal ;");
 
-        $statement->execute(['expedicaoinicial' => $productionReportModel-> getInitialShippingdate() , 'expedicaofinal' => $productionReportModel-> getFinalShippingdate()]);
+        $statement->execute(['expedicaoinicial' => $productionReportModel->getInitialShippingdate(), 'expedicaofinal' => $productionReportModel->getFinalShippingdate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -51,9 +66,14 @@ class ProductionReportDAO extends Connection
 
     public function getProductionReportFilterDatesInGeneralTarjaDAO(ProductionReportModel $productionReportModel): array
     {
-        $statement = $this->pdo->prepare("SELECT * FROM view_verocard_producao_tarja where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal OR dt_processamento BETWEEN :datainicial AND :datafinal;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status from view_verocard_producao_tarja where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal OR dt_processamento BETWEEN :datainicial AND :datafinal;");
 
-        $statement->execute(['expedicaoinicial' => $productionReportModel-> getInitialShippingdate() , 'expedicaofinal' => $productionReportModel-> getFinalShippingdate() , 'datainicial' => $productionReportModel-> getInitialProcessinDate() , 'datafinal' => $productionReportModel-> getFinalProcessinDate()]);
+        $statement->execute(['expedicaoinicial' => $productionReportModel->getInitialShippingdate(), 'expedicaofinal' => $productionReportModel->getFinalShippingdate(), 'datainicial' => $productionReportModel->getInitialProcessinDate(), 'datafinal' => $productionReportModel->getFinalProcessinDate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -74,9 +94,14 @@ class ProductionReportDAO extends Connection
     public function getProductionReportFilterFileChipDAO(ProductionReportModel $productionReportModel): array
     {
 
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_chip WHERE nome_arquivo_proc = :arquivo");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status , rastreio from view_verocard_producao_chip WHERE nome_arquivo_proc = :arquivo");
 
-        $statement->execute(['arquivo' => $productionReportModel-> getFile()]);
+        $statement->execute(['arquivo' => $productionReportModel->getFile()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -86,9 +111,14 @@ class ProductionReportDAO extends Connection
     public function getProductionReportFilterDateChipDAO(ProductionReportModel $productionReportModel): array
     {
 
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_chip where dt_processamento BETWEEN :datainicial AND :datafinal ;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status , rastreio from view_verocard_producao_chip where dt_processamento BETWEEN :datainicial AND :datafinal ;");
 
-        $statement->execute(['datainicial' => $productionReportModel-> getInitialProcessinDate() , 'datafinal' => $productionReportModel-> getFinalProcessinDate() ]);
+        $statement->execute(['datainicial' => $productionReportModel->getInitialProcessinDate(), 'datafinal' => $productionReportModel->getFinalProcessinDate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -97,9 +127,14 @@ class ProductionReportDAO extends Connection
 
     public function getProductionReportFilterShippingChipDAO(ProductionReportModel $productionReportModel): array
     {
-        $statement = $this->pdo->prepare("SELECT * from view_verocard_producao_chip where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal ;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status , rastreio from view_verocard_producao_chip where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal ;");
 
-        $statement->execute(['expedicaoinicial' => $productionReportModel-> getInitialShippingdate() , 'expedicaofinal' => $productionReportModel-> getFinalShippingdate()]);
+        $statement->execute(['expedicaoinicial' => $productionReportModel->getInitialShippingdate(), 'expedicaofinal' => $productionReportModel->getFinalShippingdate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -109,18 +144,17 @@ class ProductionReportDAO extends Connection
 
     public function getProductionReportFilterDatesInGeneralChipDAO(ProductionReportModel $productionReportModel): array
     {
-        $statement = $this->pdo->prepare("SELECT * FROM view_verocard_producao_chip where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal OR dt_processamento BETWEEN :datainicial AND :datafinal;");
+        $statement = $this->pdo->prepare("SELECT cod_produto, 
+        desc_produto ,
+         to_char(dt_processamento, 'DD/MM/YYYY') AS dt_processamento, 
+         to_char(dt_expedicao, 'DD/MM/YYYY') AS dt_expedicao,
+         nome_arquivo_proc
+        total_cartoes, status , rastreio FROM view_verocard_producao_chip where dt_expedicao BETWEEN :expedicaoinicial AND :expedicaofinal OR dt_processamento BETWEEN :datainicial AND :datafinal;");
 
-        $statement->execute(['expedicaoinicial' => $productionReportModel-> getInitialShippingdate() , 'expedicaofinal' => $productionReportModel-> getFinalShippingdate() , 'datainicial' => $productionReportModel-> getInitialProcessinDate() , 'datafinal' => $productionReportModel-> getFinalProcessinDate()]);
+        $statement->execute(['expedicaoinicial' => $productionReportModel->getInitialShippingdate(), 'expedicaofinal' => $productionReportModel->getFinalShippingdate(), 'datainicial' => $productionReportModel->getInitialProcessinDate(), 'datafinal' => $productionReportModel->getFinalProcessinDate()]);
 
         $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         return $response;
     }
-
-
-
-
-
-
 }

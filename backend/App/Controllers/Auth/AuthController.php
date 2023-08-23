@@ -65,6 +65,7 @@ final class AuthController
             'sub' => $user -> getId(),
             'name' => $user -> getNome(),
             'email' => $user -> getEmail(),
+            'admin' => $user -> getAdmin(),
             'expired_at' => $expiredDate
         ];
 
