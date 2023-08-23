@@ -5,7 +5,7 @@ interface ITable {
     data: Array<Object>
     column: Array<Object>
     titleTable?: string
-    typeMessage : boolean
+    typeMessage? : boolean
 }
 
 const Table: React.FC<ITable> = ({ data, column , titleTable , typeMessage}) => {

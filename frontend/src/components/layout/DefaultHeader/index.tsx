@@ -11,7 +11,7 @@ const DefaultHeader: React.FC<IDefaultHeader> = ({ sessionTheme }) => {
             <NavBarClient />
 
             <div className="image-logo-up">
-                <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/LogoUP.svg?alt=media&token=a4d9e086-9cc7-4d6d-846d-875f2858b698' alt="Logo up" />
+                <img src='https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/Logo-up-sem-fundo.png?alt=media&token=bd042517-7333-40ba-a87d-1998b1f382a7' alt="Logo up" />
             </div>
 
             <div className="title-session">

@@ -5,7 +5,7 @@ import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Select from "../../components/shared/Select";
 import api from "../../connectionAPI";
 import Table from "../../components/shared/Table";
-import Button from "../../components/shared/Button";
+
 import Swal from "sweetalert2";
 
 const PageProductionReport: React.FC = () => {
@@ -50,36 +50,18 @@ const PageProductionReport: React.FC = () => {
             selector: (row: any) => row.dt_expedicao
         },
         {
-            name: 'Nome do arquivo',
-            selector: (row: any) => row.nome_arquivo_proc
-        },
-        {
             name: 'Total de cartões',
             selector: (row: any) => row.total_cartoes
         },
         {
             name: 'Status',
             selector: (row: any) => row.status
-        }
+        },
+        {
+            name: 'Rastreio',
+            selector: (row: any) => row.rastreio  
+        },
     ];
-
-    useEffect(() => {
-
-        const HomePageRequests = async () => {
-
-
-
-            await api.get('/teste')
-                .then((data) => {
-                    setTeste(data.data)
-                }).catch(() => {
-
-                });
-        }
-
-        HomePageRequests()
-
-    }, []);
 
 
 
@@ -110,7 +92,7 @@ const PageProductionReport: React.FC = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Datas incorretas...',
-                    text: 'A data inicial não pode ser menor que a final.',
+                    text: 'A data inicial não pode ser maior que a final.',
                 });
             }
 
@@ -118,7 +100,7 @@ const PageProductionReport: React.FC = () => {
             Swal.fire({
                 icon: 'error',
                 title: 'Selecione um tipo de cartão...',
-                text: 'Selecione tarja ou chip antes de fazer a filtragem de dados',
+                text: 'Selecione tarja ou chip antes de fazer a filtragem dos dados.',
             });
         }
 
@@ -168,14 +150,7 @@ const PageProductionReport: React.FC = () => {
                     
                 }
 
-
-
-
-                <Button text="Pesquisar" onClick={() => ProductionReportRequests()} />
-
-                <DownloadFacilitators printClick={() => window.print()} />
-
-
+                <DownloadFacilitators onClickSearch={() => ProductionReportRequests()} printClick={() => window.print()} />
 
             </div>
 

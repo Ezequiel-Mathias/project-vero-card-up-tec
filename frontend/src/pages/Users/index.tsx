@@ -56,13 +56,13 @@ const PageUsers: React.FC = () => {
 
         <div className="container-page-users">
 
-            <DefaultHeader sessionTheme="Vero card users" />
+            <DefaultHeader sessionTheme="Admin users" />
 
             <div className="container-input-search">
-                <Input info="Pesquisar:" icon="search" />
-            </div>
 
-            
+                <Input info="Pesquisar:" icon="search" />
+                
+            </div>
 
         </div>
 
