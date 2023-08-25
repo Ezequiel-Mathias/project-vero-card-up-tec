@@ -43,7 +43,7 @@ const PageStock: React.FC = () => {
                 setStockData(data.data)
     
             }).catch(() => {
-    
+                
             });
 
         }else{

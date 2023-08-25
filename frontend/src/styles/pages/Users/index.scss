@@ -1,10 +1,39 @@
-.container-page-users{
+.container-page-users {
 
-    .container-input-search{
+    .container-input-search {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
+    .table-container {
+        margin-top: 62px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-y: scroll;
+
+        .scroll-table {
+
+               table {
+                max-height: max-content;
+                
+
+                td {
+                    padding: 16px;
+                    text-align: center;
+                    border-top: solid 1px black;
+
+                }
+
+
+
+            }
+        }
+
+    }
+
 
 }

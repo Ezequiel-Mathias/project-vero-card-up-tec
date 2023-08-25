@@ -1,56 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBarClient from "../../components/layout/NavBarClient";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
 import Table from "../../components/shared/Table";
+import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
+import Icon from "../../components/shared/Icon";
+import api from "../../connectionAPI";
 
 
 const PageUsers: React.FC = () => {
 
-    const columnsInProduction: Array<Object> = [
-        {
-            name: 'Id',
-            selector: (row: any) => row.id_op,
-            sortable: true
-        },
-        {
-            name: 'Nome de usuário',
-            selector: (row: any) => row.nome_arquivo,
+    const [users, setUsers] = useState([]);
 
-        },
-        {
-            name: 'Senha',
-            selector: (row: any) => row.nr_lote,
+    useEffect(() => {
+
+        const UsersPageRequests = async () => {
+
+            await api.get('/users')
+                .then((data) => {
+                    setUsers(data.data);
+                }).catch(() => {
+
+                });
+        }
+
+        UsersPageRequests()
+
+    }, []);
 
 
-        },
-        {
-            name: 'Email',
-            selector: (row: any) => row.tipo
-
-        },
-        {
-            name: 'Nome completo',
-            selector: (row: any) => row.dt_op
-
-        },
-        {
-            name: 'Criar',
-            selector: (row: any) => row.qtd_objs,
-           
-        },
-        {
-            name: 'Editar',
-            selector: (row: any) => row.qtd_objs,
-            
-        },
-        
-        {
-            name: 'Deletar',
-            selector: (row: any) => row.qtd_objs,
-            
-        },
-    ];
 
     return (
 
@@ -61,8 +39,49 @@ const PageUsers: React.FC = () => {
             <div className="container-input-search">
 
                 <Input info="Pesquisar:" icon="search" />
-                
+
             </div>
+
+            <div className="table-container">
+
+                <div className="scroll-table">
+                    <table >
+                        <tr>
+                            <td>Nome</td>
+                            <td>Email</td>
+                            <td>Senha</td>
+                            <td>Deletar</td>
+                            <td>Editar</td>
+
+                        </tr>
+
+                        {
+                            users &&
+
+                            users.map((user : any) =>
+                                <tr>
+
+                                    <td>{user.nome}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.senha}</td>
+                                    <td><Icon name="delete" /></td>
+                                    <td><Icon name="edit" /></td>
+
+                                </tr>
+                            )
+
+
+                        }
+
+
+                    </table>
+                </div>
+
+
+            </div>
+
+
+            <DownloadFacilitators />
 
         </div>
 
