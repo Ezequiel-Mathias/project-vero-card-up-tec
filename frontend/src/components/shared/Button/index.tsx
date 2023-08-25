@@ -8,7 +8,7 @@ interface IButtonProps {
 const Button: React.FC<IButtonProps> = ({ text, onClick }) => {
 
     return (
-        <div className="button" onClick={onClick} >
+        <div className='button' onClick={onClick} >
             <p>{text}</p>
         </div>
     )

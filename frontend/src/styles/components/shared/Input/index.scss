@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-
+    
     p {
         font-weight: $font-semibold;
         color: $color-client;
@@ -15,18 +15,16 @@
         height: 54px;
         width: clamp(19rem, 31vw, 24.375rem);
         padding: 0px 8px;
-
+        background-color: $color-white;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 18px;
-
         border: 2px solid;
         border-color: $color-gray;
         border-radius: 8px;
         border-style: solid;
-
         transition: border .25s ease-out;
         
 

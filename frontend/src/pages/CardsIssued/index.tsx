@@ -9,7 +9,7 @@ const PageCardsIssued: React.FC = () => {
         <>
          <DefaultHeader sessionTheme="Cartões emitidos"/> 
 
-         <DownloadFacilitators />  
+         <DownloadFacilitators textButton="Pesquisar" />  
         </>
     )
 }

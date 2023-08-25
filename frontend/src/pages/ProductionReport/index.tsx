@@ -150,7 +150,7 @@ const PageProductionReport: React.FC = () => {
                     
                 }
 
-                <DownloadFacilitators onClickSearch={() => ProductionReportRequests()} printClick={() => window.print()} />
+                <DownloadFacilitators textButton="Pesquisar" onClickButton={() => ProductionReportRequests()} printClick={() => window.print()} />
 
             </div>
 

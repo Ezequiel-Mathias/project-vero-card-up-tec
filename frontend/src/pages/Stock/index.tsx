@@ -124,7 +124,7 @@ const PageStock: React.FC = () => {
                     />
                 }
 
-                <DownloadFacilitators onClickSearch={() => ProductionReportRequests()} />
+                <DownloadFacilitators  textButton={'Pesquisar'} onClickButton={() => ProductionReportRequests()} />
 
             </div>
 

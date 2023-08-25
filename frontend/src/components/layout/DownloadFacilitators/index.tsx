@@ -7,17 +7,19 @@ interface IDownloadFacilitators {
     csvClick?: any
     excelClick?: any
     wordClick?: any
-    onClickSearch?: any
+    textButton : string
+    onClickButton?: any
 }
 
 
-const DownloadFacilitators: React.FC<IDownloadFacilitators> = ({ printClick, csvClick, excelClick, wordClick  , onClickSearch}) => {
+const DownloadFacilitators: React.FC<IDownloadFacilitators> = ({ printClick, csvClick, excelClick, wordClick, onClickButton , textButton}) => {
 
     return (
 
         <div className="container-download-facilitators-search">
 
-            <Button text="Pesquisar" onClick={onClickSearch}/>
+            <Button text={textButton} onClick={onClickButton} />
+
             <div className="download-facilitators">
                 <div className="container-icon" onClick={printClick}><Icon name="print" /></div>
                 <div className="container-icon" onClick={csvClick}><img src="https://firebasestorage.googleapis.com/v0/b/project-vero-card-up.appspot.com/o/filecvs.svg?alt=media&token=f3dba8c9-f780-4881-a7e6-251cecd8e014" alt="" /></div>

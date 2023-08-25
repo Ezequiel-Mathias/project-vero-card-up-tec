@@ -1,0 +1,71 @@
+.container-modal {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+
+    .modal {
+        width: 624px;
+        height: 565px;
+        margin-top: 72px;
+        background-color: $color-gray;
+        border-radius: 8px;
+
+        .container-close-icon{
+            display: flex;
+            align-items: start;
+            justify-content: end;
+            padding: 8px;
+            margin-bottom: -10px;
+
+            .icon{
+                font-size: 32px;
+                cursor: pointer;
+            }
+        }
+
+        h2 {
+            text-align: center;
+           
+        }
+
+        .container-button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+
+            .button {
+                background-color: $color-green;
+            }
+        }
+
+
+        .container-fields-user {
+            margin-top: 24px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .container-select {
+                p {
+                    color: $color-black;
+                }
+            }
+
+            .container-input {
+                p {
+                    color: $color-black;
+                }
+            }
+        }
+    }
+}

@@ -6,12 +6,13 @@ import Table from "../../components/shared/Table";
 import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Icon from "../../components/shared/Icon";
 import api from "../../connectionAPI";
+import ModalUsers from "../../components/layout/ModalUsers";
 
 
 const PageUsers: React.FC = () => {
 
     const [users, setUsers] = useState([]);
-
+    const [modal , setModal] = useState(false);
     useEffect(() => {
 
         const UsersPageRequests = async () => {
@@ -28,6 +29,8 @@ const PageUsers: React.FC = () => {
 
     }, []);
 
+   const handleModal = () => setModal(!modal)
+
 
 
     return (
@@ -38,7 +41,7 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-                <Input info="Pesquisar:" icon="search" />
+            <Input info="Pesquisar:" icon="search" />
 
             </div>
 
@@ -59,7 +62,7 @@ const PageUsers: React.FC = () => {
                             users &&
 
                             users.map((user : any) =>
-                                <tr>
+                                <tr >
 
                                     <td>{user.nome}</td>
                                     <td>{user.email}</td>
@@ -81,8 +84,13 @@ const PageUsers: React.FC = () => {
             </div>
 
 
-            <DownloadFacilitators />
-
+            <DownloadFacilitators textButton="Criar usuario" onClickButton={() => handleModal()}/>
+            
+            {
+                modal &&
+                <ModalUsers onClickClose={() => handleModal()}/>
+            }
+            
         </div>
 
     )
