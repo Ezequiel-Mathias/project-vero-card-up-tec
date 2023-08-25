@@ -91,7 +91,8 @@ final class AuthController
             
         $response = $response -> withJson([
                 'token' => $token,
-                'refresh_token' => $refreshToken
+                'refresh_token' => $refreshToken,
+                'admin' => $user -> getAdmin()
         ]);
         
         return $response;

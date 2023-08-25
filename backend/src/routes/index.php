@@ -19,8 +19,8 @@ $app -> post('/login' , AuthController::class . ':login');
 
 $app -> post('/refresh-token' , AuthController::class . ':refreshToken');
 
-$app -> post('/decodfy' , function($request , $response) {
-    var_dump($request -> getAttribute('jwt'));
+$app -> get('/decodfy' , function($request , $response) {
+    $response = $response->withJson($request -> getAttribute('jwt'));
 }) -> add(new jwtDateTime())
 -> add(jwtAuth());
 

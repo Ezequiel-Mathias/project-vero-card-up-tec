@@ -26,7 +26,7 @@ final class AdminUsersController
     {
         $data = $request->getParsedBody();
 
-        if (empty(trim($data['nome'])) ||  empty($data['senha']) || empty(trim($data['email']))) {
+        if (empty(trim($data['nome'])) ||  empty($data['senha']) || empty(trim($data['email'])) || empty(trim($data['admin']))) {
 
             try {
                 throw new \Exception("Preencha todos o campos para fazer a requisição");
