@@ -189,16 +189,37 @@ $app -> delete('/users/{id}' , AdminUsersController::class . ':deleteUsers')
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
-// ==================================================
+$app -> post('/confirmEmail' , AdminUsersController::class . ':emailVerification')
+-> add(
+    function($request , $response , $next) {
 
+        $subjectToken = $request -> getAttribute('jwt');
+        
+        if($subjectToken['admin'] === "0"){
+            try {
 
-// ================== ROTA DE TESTES =============
-
-$app -> get('/teste' , ProductionReportController::class . ':Teste')
+                throw new \Exception("Você não está autorizado!, somente adms podem acessar essa rota");
+    
+            } catch (\Exception | \Throwable $ex) {
+    
+                return $response->withJson([
+                    'error' => \Exception::class,
+                    'status' => 404,
+                    'code' => "002",
+                    'userMessage' => 'Não autorizado',
+                    'developerMessage' => $ex->getMessage()
+                ], 422);
+    
+            }
+        }
+         return $next($request , $response); 
+    }
+)
 -> add(new jwtDateTime())
 -> add(jwtAuth());
 
 // ==================================================
+
 
 $app -> run();
 

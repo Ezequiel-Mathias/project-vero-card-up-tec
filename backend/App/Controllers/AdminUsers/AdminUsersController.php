@@ -15,7 +15,9 @@ final class AdminUsersController
 
         $adminUsersDAO = new AdminUsersDAO();
 
-        $adminUsersData = $adminUsersDAO->getAllUsers();
+        $subjectToken = $request->getAttribute('jwt');
+
+        $adminUsersData = $adminUsersDAO->getAllUsers($subjectToken['sub']);
 
         $response = $response->withJson($adminUsersData);
 
@@ -26,7 +28,7 @@ final class AdminUsersController
     {
         $data = $request->getParsedBody();
 
-        if (empty(trim($data['nome'])) ||  empty($data['senha']) || empty(trim($data['email'])) || empty(trim($data['admin']))) {
+        if (empty(trim($data['nome'])) ||  empty($data['senha']) || empty(trim($data['email']))) {
 
             try {
                 throw new \Exception("Preencha todos o campos para fazer a requisição");
@@ -46,7 +48,7 @@ final class AdminUsersController
 
         $adminUsersModel = new AdminUsersModel();
 
-        $adminUsersModel->setNome($data['nome'])->setSenha($data['senha'])->setEmail($data['email']);
+        $adminUsersModel->setNome($data['nome'])->setSenha($data['senha'])->setEmail($data['email'])->setAdmin($data['admin']);
 
         $adminUsersDAO->CreateUsers($adminUsersModel);
 
@@ -81,7 +83,7 @@ final class AdminUsersController
 
         $adminUsersModel = new AdminUsersModel();
 
-        $adminUsersModel->setId($data['id'])->setNome($data['nome'])->setEmail($data['email'])->setSenha($data['senha']);
+        $adminUsersModel->setId($data['id'])->setNome($data['nome'])->setEmail($data['email'])->setSenha($data['senha']) -> setAdmin($data['admin']);
 
         $adminUsersDAO->UpdateUsers($adminUsersModel);
 
@@ -94,7 +96,55 @@ final class AdminUsersController
     {
         $idUser = $args['id'];
 
+        $subjectToken = $request->getAttribute('jwt');
+
         if (!$idUser) {
+
+            try {
+
+                throw new \Exception("Passe o id no argumento da requisição");
+            } catch (\Exception | \Throwable $ex) {
+
+                return $response->withJson([
+                    'error' => \Exception::class,
+                    'status' => 422,
+                    'code' => "002",
+                    'userMessage' => 'Passe o id no argumento da requisição',
+                    'developerMessage' => $ex->getMessage()
+                ], 422);
+            }
+        } else if ($subjectToken['sub'] == $idUser) {
+            try {
+
+                throw new \Exception("Você não pode se auto deletar");
+            } catch (\Exception | \Throwable $ex) {
+
+                return $response->withJson([
+                    'error' => \Exception::class,
+                    'status' => 422,
+                    'code' => "002",
+                    'userMessage' => 'Passe um id para deletar outro usuario que não seja você',
+                    'developerMessage' => $ex->getMessage()
+                ], 422);
+            }
+        }
+
+        $adminUsersDAO = new AdminUsersDAO();
+
+        $adminUsersDAO->DeleteUsers($idUser);
+
+        $response = $response->withJson("Usuario deletado com sucesso");
+
+        return $response;
+    }
+
+
+    public function emailVerification(Request $request, Response $response, array $args): Response
+    {
+        
+        $data = $request->getParsedBody();
+
+        if (empty(trim($data['email']))) {
 
             try {
 
@@ -113,13 +163,10 @@ final class AdminUsersController
 
         $adminUsersDAO = new AdminUsersDAO();
 
-        $adminUsersModel = new AdminUsersModel();
+        $adminUsersDataEmail = $adminUsersDAO->emailVerificationWhere($data['email']);
 
-        $adminUsersDAO-> DeleteUsers($idUser);
-
-        $response = $response->withJson("Usuario deletado com sucesso");
+        $response = $response->withJson($adminUsersDataEmail);
 
         return $response;
-
     }
 }
