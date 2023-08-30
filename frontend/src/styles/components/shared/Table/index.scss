@@ -11,9 +11,9 @@
         width: clamp(20rem, 90vw, 87.5rem);
         text-align: center;
         margin-bottom: -0, 5px;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        font-size: clamp(1.18rem, 2vw, 1.4rem);
     }
 
 
@@ -21,8 +21,8 @@
         width: clamp(20rem, 90vw, 87.5rem);
         border: solid 2px $color-black;
         border-top: hidden;
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
         max-height: 650px;
 
         &::-webkit-scrollbar {
@@ -40,7 +40,7 @@
         }
 
         .rdt_TableHeadRow {
-            font-size: clamp(1.10rem, 2vw, 1.25rem);
+            font-size: clamp(1.0rem, 2vw, 1.15rem);
             font-weight: $font-semibold;
             text-align: center;
 
@@ -68,7 +68,7 @@
                     text-align: center;
                     white-space: normal;
                     padding: 10px;
-                    font-size: clamp( 0.875rem  , 2vw  , 1rem);
+                    font-size: clamp(0.875rem  , 2vw  , 1rem);
                 }
             }
 

@@ -7,10 +7,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: $font-semibold;
+    font-weight: $font-semibold; 
+    
     cursor: pointer;
 
-    &.adduser{
-        background-color: $color-black;
+    &.button-edit{
+        background-color: $color-blue;
+    }
+
+    &.button-add-user{
+        background-color: $color-green;
     }
 }

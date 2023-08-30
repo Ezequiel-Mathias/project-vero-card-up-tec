@@ -20,16 +20,18 @@ const NavBarClient: React.FC = () => {
                 <ul className="nav-list">
                     <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
                     <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
-                    <li> <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
+                    <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
                     {
                         authenticatedAdmin ?
                             <>
                                 <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
-                                <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
+                                {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
                             </>
 
                             :
-                            <></>
+                            <>
+
+                            </>
                     }
 
                 </ul>
@@ -38,20 +40,27 @@ const NavBarClient: React.FC = () => {
             {
                 sideBar ?
                     <div className='container-sadbar active'>
+
                         <div className='container-icon-close'>
+
                             <Icon name='close' onClick={showSidebar} />
+                            
                         </div>
 
                         <ul className="nav-list">
+
                             <ul className="nav-list">
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
                                 {
                                     authenticatedAdmin ?
                                         <>
                                             <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
-                                            <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
+                                            {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
                                         </>
                                         :
                                         <></>

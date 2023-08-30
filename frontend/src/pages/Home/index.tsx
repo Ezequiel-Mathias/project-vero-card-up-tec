@@ -44,7 +44,7 @@ const PageHome: React.FC = () => {
             sortable: true
         },
     ];
-
+    
     const columnsAwaitingRelease: Array<Object> = [
         {
             name: 'Ordem de produção',

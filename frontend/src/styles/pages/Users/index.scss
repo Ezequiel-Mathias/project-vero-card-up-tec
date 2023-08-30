@@ -1,7 +1,7 @@
 .container-page-users {
 
-    .container-download-facilitators-search{
-        .button{
+    .container-download-facilitators-search {
+        .button {
             background-color: $color-green;
         }
     }
@@ -19,19 +19,43 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow-y: scroll;
+
 
         .scroll-table {
+            overflow-y: scroll;
+            height: 390px;
+            margin-left: 20px;
+            margin-right: 20px;
 
-               table {
+            &::-webkit-scrollbar {
+                width: 8px;
+                height: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-gray;
+                border-radius: 20px;
+            }
+
+            table {
                 max-height: max-content;
-                
+
 
                 td {
                     padding: 16px;
+                    width: 30px;
                     text-align: center;
-                    border-top: solid 1px black;
+                    border: solid 1px black;
+                    word-wrap: break-word;
 
+                    .icon{
+                        cursor: pointer;
+                    }
+                    
                 }
 
 

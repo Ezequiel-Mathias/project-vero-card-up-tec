@@ -28,7 +28,7 @@ export function useAuth() {
                 await api.get('/decodfy').then((data) => {
                     if (data.data.admin == '1') {
                         setAuthenticatedAdmin(true)
-                        console.log(data.data.admin)
+                        
                     }
                 }).catch(() => {
 

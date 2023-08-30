@@ -7,12 +7,17 @@ import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Icon from "../../components/shared/Icon";
 import api from "../../connectionAPI";
 import ModalUsers from "../../components/layout/ModalUsers";
+import Swal from "sweetalert2";
 
 
 const PageUsers: React.FC = () => {
 
     const [users, setUsers] = useState([]);
-    const [modal , setModal] = useState(false);
+
+    const [editDataUser, setEditdatauser] = useState([]);
+
+    const [modal, setModal] = useState(false);
+
     useEffect(() => {
 
         const UsersPageRequests = async () => {
@@ -29,9 +34,53 @@ const PageUsers: React.FC = () => {
 
     }, []);
 
-   const handleModal = () => setModal(!modal)
+    const handleModal = () => setModal(!modal)
 
 
+    const DeleteUser = async (id: any) => {
+
+        Swal.fire({
+            title: 'Deseja deletar esse usuário?',
+            text: "Essa ação é inreversível!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, deletar!'
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                Swal.fire(
+                    'Deletado!',
+                    'O usuario foi deletado com sucesso.',
+                    'success'
+                )
+                setTimeout(() => {
+                    api.delete(`/users/${id}`)
+                        .then(() => {
+                            window.location.reload();
+                        }).catch(() => {
+
+                        });
+                }, 1000);
+
+            }
+        })
+
+
+    }
+
+    const EditUser = (user: any) => {
+        setEditdatauser(user)
+        handleModal()
+
+    }
+
+    const AddUser = () => {
+        setEditdatauser([])
+        handleModal()
+    }
 
     return (
 
@@ -41,7 +90,7 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-            <Input info="Pesquisar:" icon="search" />
+                <Input info="Pesquisar:" icon="search" />
 
             </div>
 
@@ -53,27 +102,31 @@ const PageUsers: React.FC = () => {
                             <td>Nome</td>
                             <td>Email</td>
                             <td>Senha</td>
+                            <td>Adm</td>
                             <td>Deletar</td>
                             <td>Editar</td>
 
                         </tr>
-
-                        {
+        
+                         {
                             users &&
 
-                            users.map((user : any) =>
-                                <tr >
-
+                            users.map((user: any) =>
+                                <tr>
                                     <td>{user.nome}</td>
+
                                     <td>{user.email}</td>
+
                                     <td>{user.senha}</td>
-                                    <td><Icon name="delete" /></td>
-                                    <td><Icon name="edit" /></td>
+
+                                    <td>{user.admin == '0' ? 'NÃO' : 'SIM'}</td>
+
+                                    <td><Icon name="delete" onClick={() => DeleteUser(user.id)} /></td>
+
+                                    <td><Icon name="edit" onClick={() => EditUser(user)} /></td>
 
                                 </tr>
                             )
-
-
                         }
 
 
@@ -84,13 +137,13 @@ const PageUsers: React.FC = () => {
             </div>
 
 
-            <DownloadFacilitators textButton="Criar usuario" onClickButton={() => handleModal()}/>
-            
+            <DownloadFacilitators textButton="Criar usuario" onClickButton={() => AddUser()} />
+
             {
                 modal &&
-                <ModalUsers onClickClose={() => handleModal()}/>
+                <ModalUsers dataEdit={editDataUser ? editDataUser : ''} onClickClose={() => handleModal()} />
             }
-            
+
         </div>
 
     )
