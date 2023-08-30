@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Icon from '../../shared/Icon';
 import { Link } from 'react-router-dom';
-
+import { Context } from '../../../AuthContext/AuthContext';
 const NavBarClient: React.FC = () => {
 
-    const [sideBar, setSideBar] = useState(false)
+    const [sideBar, setSideBar] = useState(false);
 
-    const showSidebar = () => setSideBar(!sideBar)
+    const { authenticatedAdmin }: any = useContext(Context);
+
+    const showSidebar = () => setSideBar(!sideBar);
 
     return (
         <header>
@@ -18,26 +20,51 @@ const NavBarClient: React.FC = () => {
                 <ul className="nav-list">
                     <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
                     <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
-                    <li> <Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
-                    <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link></li>
-                    <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
+                    <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
+                    {
+                        authenticatedAdmin ?
+                            <>
+                                <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
+                                {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
+                            </>
+
+                            :
+                            <>
+
+                            </>
+                    }
+
                 </ul>
             </nav>
 
             {
                 sideBar ?
                     <div className='container-sadbar active'>
+
                         <div className='container-icon-close'>
+
                             <Icon name='close' onClick={showSidebar} />
+                            
                         </div>
 
                         <ul className="nav-list">
+
                             <ul className="nav-list">
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+
                                 <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
-                                <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin Users</Link></li>
-                                <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li>
+                                {
+                                    authenticatedAdmin ?
+                                        <>
+                                            <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
+                                            {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
+                                        </>
+                                        :
+                                        <></>
+                                }
                             </ul>
                         </ul>
                     </div>

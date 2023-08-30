@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../connectionAPI";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -7,29 +7,56 @@ export function useAuth() {
 
     const [authenticated, setAuthenticated] = useState(false);
 
+    const [authenticatedAdmin, setAuthenticatedAdmin] = useState(false);
+
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
         const token = localStorage.getItem('token');
 
-        if (token) {
-            api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
-            setAuthenticated(true);
+        const tokenConference = async () => {
+
+            if (token) {
+
+                api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+
+                setAuthenticated(true);
+
+                await api.get('/decodfy').then((data) => {
+                    if (data.data.admin == '1') {
+                        setAuthenticatedAdmin(true)
+                        
+                    }
+                }).catch(() => {
+
+                })
+            }
+
         }
 
+
+        tokenConference();
         setLoading(false);
+
     }, [])
 
-     const handleLogin = async (email? : string , senha? : string) => {
-         await api.post('/login', {
+    const handleLogin = async (email?: string, senha?: string) => {
+        await api.post('/login', {
             email: email,
             senha: senha
         }).then((data) => {
 
-            if(!data.data.token)
+            if (!data.data.token)
                 return;
+
+            if(data.data.admin == 1){
+                setAuthenticatedAdmin(true)
+            }else{
+                setAuthenticatedAdmin(false)
+            }
 
             localStorage.setItem('token', JSON.stringify(data.data.token));
 
@@ -45,10 +72,10 @@ export function useAuth() {
             Swal.fire({
                 icon: 'error',
                 title: 'Login invalido...',
-                text: 'Email ou senha incorretos, verifique os dados e tente novamente.',
-              });
+                text: 'Email ou senha incorretos, verifique os dados e tente novamente.'
+            });
 
-              
+
         });
     }
 
@@ -68,5 +95,5 @@ export function useAuth() {
         return <h1>Loading</h1>
     }
 
-    return {authenticated, loading , handleLogin , handleLogout}
+    return { authenticated, loading, handleLogin, handleLogout, authenticatedAdmin }
 }

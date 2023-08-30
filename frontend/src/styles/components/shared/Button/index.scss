@@ -3,10 +3,19 @@
     height: 41px;
     border-radius: 16px;
     background-color: $color-client;
-    color: white;
+    color: $color-white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: $font-semibold;
+    font-weight: $font-semibold; 
+    
     cursor: pointer;
+
+    &.button-edit{
+        background-color: $color-blue;
+    }
+
+    &.button-add-user{
+        background-color: $color-green;
+    }
 }

@@ -8,8 +8,8 @@ const PageHome: React.FC = () => {
 
     const [inProductionData, setInProductionData] = useState([]);
     const [awaitingReleaseData, setAwaitingRelease] = useState([]);
-    const [typeMessageInProduction , setTypeMessageInProduction] = useState(false);
-    const [typeMessageAwaitingRelease , setTypeMessageAwaitingRelease] = useState(false);
+    const [typeMessageInProduction, setTypeMessageInProduction] = useState(false);
+    const [typeMessageAwaitingRelease, setTypeMessageAwaitingRelease] = useState(false);
 
     const columnsInProduction: Array<Object> = [
         {
@@ -44,7 +44,7 @@ const PageHome: React.FC = () => {
             sortable: true
         },
     ];
-
+    
     const columnsAwaitingRelease: Array<Object> = [
         {
             name: 'Ordem de produção',
@@ -68,27 +68,31 @@ const PageHome: React.FC = () => {
 
     useEffect(() => {
 
-        api.get('/production')
-            .then((data) => {
-                setInProductionData(data.data)
-            }).catch(() => {
-                setTypeMessageInProduction(true)
-            });
+        const HomePageRequests = async () => {
 
-        api.get('/awaiting-release')
-            .then((data) => {
-                setAwaitingRelease(data.data)
-            }).catch(() => {
-                setTypeMessageAwaitingRelease(true)
-            });
+            await api.get('/production')
+                .then((data) => {
+                    setInProductionData(data.data)
+                }).catch(() => {
+                    setTypeMessageInProduction(true)
+                });
+
+            await api.get('/awaiting-release')
+                .then((data) => {                          
+                    setAwaitingRelease(data.data)
+                }).catch(() => {
+                    setTypeMessageAwaitingRelease(true)
+                });
+        }
+
+       HomePageRequests()
 
     }, []);
-
 
     return (
         <div className="container-page-home">
 
-            <DefaultHeader/>
+            <DefaultHeader />
 
             <Table
                 data={inProductionData}
@@ -97,12 +101,12 @@ const PageHome: React.FC = () => {
                 typeMessage={typeMessageInProduction}
             />
 
-             <Table
+            <Table
                 data={awaitingReleaseData}
                 column={columnsAwaitingRelease}
                 titleTable="Aguardando liberação"
                 typeMessage={typeMessageAwaitingRelease}
-            /> 
+            />
         </div >
     )
 }

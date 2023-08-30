@@ -65,6 +65,7 @@ final class AuthController
             'sub' => $user -> getId(),
             'name' => $user -> getNome(),
             'email' => $user -> getEmail(),
+            'admin' => $user -> getAdmin(),
             'expired_at' => $expiredDate
         ];
 
@@ -90,7 +91,8 @@ final class AuthController
             
         $response = $response -> withJson([
                 'token' => $token,
-                'refresh_token' => $refreshToken
+                'refresh_token' => $refreshToken,
+                'admin' => $user -> getAdmin()
         ]);
         
         return $response;

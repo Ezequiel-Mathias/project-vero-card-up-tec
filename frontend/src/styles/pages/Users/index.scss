@@ -1,10 +1,69 @@
-.container-page-users{
+.container-page-users {
 
-    .container-input-search{
+    .container-download-facilitators-search {
+        .button {
+            background-color: $color-green;
+        }
+    }
+
+    .container-input-search {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
+    .table-container {
+        margin-top: 62px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        .scroll-table {
+            overflow-y: scroll;
+            height: 390px;
+            margin-left: 20px;
+            margin-right: 20px;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                height: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-gray;
+                border-radius: 20px;
+            }
+
+            table {
+                max-height: max-content;
+
+
+                td {
+                    padding: 16px;
+                    width: 30px;
+                    text-align: center;
+                    border: solid 1px black;
+                    word-wrap: break-word;
+
+                    .icon{
+                        cursor: pointer;
+                    }
+                    
+                }
+
+
+
+            }
+        }
+
+    }
+
 
 }

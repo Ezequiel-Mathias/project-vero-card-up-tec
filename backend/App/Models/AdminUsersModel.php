@@ -22,6 +22,11 @@ final class AdminUsersModel
      */
     private $senha;
 
+     /**
+     * @var string
+     */
+    private $admin;
+     
 
     public function getId(): string
     {
@@ -73,4 +78,19 @@ final class AdminUsersModel
 
         return $this;
     }
+
+    public function getAdmin(): string
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(string $admin): AdminUsersModel
+    {
+
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    
 }

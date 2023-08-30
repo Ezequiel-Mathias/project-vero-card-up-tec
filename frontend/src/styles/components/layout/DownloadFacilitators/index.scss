@@ -1,24 +1,36 @@
-.container-download-facilitators{
+.container-download-facilitators-search {
     display: flex;
-    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 72px;
+    margin-bottom: 32px;
+    display: flex;
 
-    .container-icon{
-        width: 45px;
-        height: 45px;
-        background-color: $color-gray;
+
+    .download-facilitators {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        border-radius: 100%;
-        
-        .icon{
-            color: $color-client;
-            font-size: 30px;
-        }
-    }
+        gap: 16px;
 
-    .container-icon:hover{
-        scale: (1.09);
+        .container-icon {
+            width: 45px;
+            height: 45px;
+            background-color: $color-gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 100%;
+
+            .icon {
+                color: $color-client;
+                font-size: 30px;
+            }
+        }
+
+        .container-icon:hover {
+            scale: (1.09);
+        }
     }
 }
