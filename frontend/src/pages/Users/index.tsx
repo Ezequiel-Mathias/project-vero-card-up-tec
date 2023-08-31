@@ -9,15 +9,18 @@ import api from "../../connectionAPI";
 import ModalUsers from "../../components/layout/ModalUsers";
 import Swal from "sweetalert2";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import { isValidEmail } from "../../utils/Validation";
 
 
 const PageUsers: React.FC = () => {
 
     const [users, setUsers] = useState([]);
 
-    const [searchUserText, setSearchUserText] = useState();
+    const [searchUserText, setSearchUserText] = useState('');
 
     const [editDataUser, setEditdatauser] = useState([]);
+
+    const [emailVerification, setEmailVerification] = useState(true);
 
     const [modal, setModal] = useState(false);
 
@@ -86,8 +89,24 @@ const PageUsers: React.FC = () => {
         handleModal()
     }
 
+    const ValidateEmailInput = () => {
+
+        if (!isValidEmail(searchUserText)) {
+
+            setEmailVerification(false);
+
+            return false
+        }
+
+        setEmailVerification(true);
+
+        return true;
+    }
+
     const searchUser = async () => {
-        if (searchUserText) {
+
+        if (searchUserText && !ValidateEmailInput()) {
+
             setUsers([])
 
             await api.post('/searchUser', {
@@ -113,6 +132,8 @@ const PageUsers: React.FC = () => {
     })
 
 
+
+
     return (
 
         <div className="container-page-users">
@@ -121,8 +142,8 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-                <Input clickIcon={() => searchUser()} info="Pesquisar por email:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
-
+                <Input validate={() => ValidateEmailInput()} clickIcon={() => searchUser()} info="Pesquisar por email:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
+                {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
             </div>
 
             <div className="table-container">
@@ -130,6 +151,7 @@ const PageUsers: React.FC = () => {
                 <div className="scroll-table">
 
                     <table >
+
                         <tr>
                             <td>Nome</td>
                             <td>Email</td>

@@ -10,6 +10,10 @@ const NavBarClient: React.FC = () => {
 
     const showSidebar = () => setSideBar(!sideBar);
 
+    const { handleLogout }: any = useContext(Context);
+
+    
+
     return (
         <header>
             <nav>
@@ -18,9 +22,13 @@ const NavBarClient: React.FC = () => {
                 </div>
                 <Icon name='menu' onClick={showSidebar} />
                 <ul className="nav-list">
+
                     <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+
                     <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+
                     <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
+
                     {
                         authenticatedAdmin ?
                             <>
@@ -33,13 +41,17 @@ const NavBarClient: React.FC = () => {
 
                             </>
                     }
+                    <div className='container-logout-icon'>
+                        <li><Icon name='logout' onClick={() => handleLogout()} /></li>
+                    </div>
+
 
                 </ul>
             </nav>
 
             {
                 sideBar ?
-                    <div className='container-sadbar active'>
+                    <div className='container-sadbar'>
 
                         <div className='container-icon-close'>
 
@@ -47,26 +59,29 @@ const NavBarClient: React.FC = () => {
 
                         </div>
 
+
+
                         <ul className="nav-list">
 
-                            <ul className="nav-list">
+                            <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
 
-                                <li><Link to={`${process.env.PUBLIC_URL}/home`}>Home</Link></li>
+                            <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
 
-                                <li><Link to={`${process.env.PUBLIC_URL}/relatorio-producao`}>Relatorio de Produção</Link></li>
+                            <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
 
-                                <li><Link to={`${process.env.PUBLIC_URL}/estoque`}>Estoque</Link></li>
-                                {
-                                    authenticatedAdmin ?
-                                        <>
-                                            <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
-                                            {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
-                                        </>
-                                        :
-                                        <></>
-                                }
-                            </ul>
+                            {
+                                authenticatedAdmin ?
+                                    <>
+                                        <li><Link to={`${process.env.PUBLIC_URL}/usuarios`}>Admin users</Link></li>
+                                        {/* <li><Link to={`${process.env.PUBLIC_URL}/emitidos`}>Cartões Emitidos</Link></li> */}
+                                    </>
+                                    :
+                                    <></>
+                            }
+
+                            <li><Icon name='logout' onClick={() => handleLogout()} /></li>
                         </ul>
+
                     </div>
 
                     :

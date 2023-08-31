@@ -51,6 +51,13 @@ header {
             display: none;
         }
 
+        .container-logout-icon{
+            .icon{
+                display: block;
+                font-size: 25px;
+            }
+        }
+
         ul {
             display: flex;
             list-style: none;
@@ -110,6 +117,13 @@ header {
 
             }
 
+        }
+
+        .nav-list{
+            .icon{
+                color: $color-white;
+                font-size: 27px;
+            }
         }
 
         ul {
