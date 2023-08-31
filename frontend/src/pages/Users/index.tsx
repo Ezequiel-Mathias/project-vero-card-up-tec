@@ -87,8 +87,19 @@ const PageUsers: React.FC = () => {
     }
 
     const searchUser = async () => {
-        if(searchUserText){
-            console.log(searchUserText)
+        if (searchUserText) {
+            setUsers([])
+
+            await api.post('/searchUser', {
+                email: searchUserText
+            })
+                .then((data) => {
+                    setUsers(data.data);
+                }).catch((error) => {
+                    console.log(error)
+                });
+        } else {
+            window.location.reload();
         }
 
     }
@@ -110,7 +121,7 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-                <Input clickIcon={() =>  searchUser()} info="Pesquisar:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
+                <Input clickIcon={() => searchUser()} info="Pesquisar por email:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
 
             </div>
 
