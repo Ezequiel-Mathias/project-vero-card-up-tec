@@ -43,6 +43,7 @@
             font-size: clamp(1.0rem, 2vw, 1.15rem);
             font-weight: $font-semibold;
             text-align: center;
+            width: 100%;
 
             .sc-cseZMA {
                 display: flex;
@@ -69,6 +70,7 @@
                     white-space: normal;
                     padding: 10px;
                     font-size: clamp(0.875rem  , 2vw  , 1rem);
+                    
                 }
             }
 

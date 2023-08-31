@@ -7,13 +7,8 @@
     padding-left: clamp(1.25rem, 6vw, 4.375rem);
     padding-right: clamp(1.25rem, 6vw, 4.375rem);
 
-
     .button {
         margin-top: 72px;
-        margin-bottom: 32px;
-    }
-
-    .container-download-facilitators {
         margin-bottom: 32px;
     }
 
@@ -48,7 +43,6 @@
 
     @media print {
 
-
         .container-inputs {
             display: none;
         }
@@ -57,18 +51,53 @@
             display: none;
         }
 
-        .container-download-facilitators {
+        .container-download-facilitators-search {
             display: none;
         }
 
-        .sc-dmsloy {
-            max-height: max-content;
-            width: 2000px;
+        .container-table {
+            .sc-dmsloy {
+                max-height: max-content;
+                width: max-content;
+                width: 107.5rem;
+
+
+                .rdt_TableHeadRow {
+                    font-size: clamp(1.0rem, 2vw, 1.15rem);
+                    font-weight: $font-semibold;
+                    text-align: center;
+                    
+                    .sc-cseZMA {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .sc-kDLnty {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                .sc-jqNall {
+
+                    .sc-hLljAB {
+
+                        div {
+                            width: 200px;
+                            text-align: center;
+                            white-space: normal;
+                            padding: 10px;
+                            font-size: clamp(0.875rem, 2vw, 1rem);
+                        }
+
+                    }
+
+                }
+            }
         }
 
-
-
     }
+
 }
 
 
@@ -80,6 +109,6 @@
         margin-bottom: 0;
     }
 
-    .container-table {}
+
 
 }

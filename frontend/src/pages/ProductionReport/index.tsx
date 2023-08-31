@@ -1,25 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
 import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Select from "../../components/shared/Select";
 import api from "../../connectionAPI";
 import Table from "../../components/shared/Table";
-
+import {useDownloadExcel} from "react-export-table-to-excel";
 import Swal from "sweetalert2";
 
 const PageProductionReport: React.FC = () => {
 
     const [ProductionReportData, setProductionReportData] = useState([]);
+
     const [ProductionReportMessage, setProductionReportMessage] = useState(false);
-    const [Teste, setTeste] = useState([])
+
     const [formValues, setFormValues] = useState({
 
         fileName: "",
+        
         InitialProcessingDate: "",
+
         FinalProcessingDate: "",
+
         InitialShippingDate: "",
+
         FinalShippingDate: "",
+
         cardType: ""
 
     });
@@ -83,11 +89,12 @@ const PageProductionReport: React.FC = () => {
 
                     setProductionReportData(data.data)
 
-                    console.log(data.data)
+                    
 
                 }).catch(() => {
                     setProductionReportMessage(true)
                 });
+
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -107,6 +114,15 @@ const PageProductionReport: React.FC = () => {
     }
 
 
+    const refExcel : any = useRef();
+
+    const {onDownload} = useDownloadExcel({
+        currentTableRef: refExcel.current,
+        filename: "Web Users",
+        sheet:"Web Users"
+    })
+
+
     return (
         <>
             <DefaultHeader sessionTheme="Relatorio de produção" />
@@ -119,9 +135,13 @@ const PageProductionReport: React.FC = () => {
                         <Input name="fileName" placeholder='Arquivo...' info="Arquivo:" onChange={handleChange} />
 
                         <Select info={"Selecione o tipo de cartão:"} name="cardType" onChange={handleChange}>
+
                             <option selected>Selecione um tipo...</option>
+
                             <option value="Tarja">Tarja</option>
+
                             <option value="Chip">Chip</option>
+
                         </Select>
 
                     </div>
@@ -146,11 +166,12 @@ const PageProductionReport: React.FC = () => {
                         column={columnsProductionReport}
                         data={ProductionReportData}
                         typeMessage={true}
+                        refExcel={refExcel}
                     />
                     
                 }
 
-                <DownloadFacilitators textButton="Pesquisar" onClickButton={() => ProductionReportRequests()} printClick={() => window.print()} />
+                <DownloadFacilitators textButton="Pesquisar"  excelClick={() => onDownload()} onClickButton={() => ProductionReportRequests()} printClick={() => window.print()} />
 
             </div>
 

@@ -1,3 +1,13 @@
+
+@keyframes go-back {
+    from {
+      transform: translateX(100px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  } 
+
 header {
     background-color: $color-client;
     display: flex;
@@ -85,6 +95,7 @@ header {
         right: 0%;
         flex-direction: column;
         font-weight: $font-semibold;
+        animation: go-back 1s;
         
         .container-icon-close {
             width: 100%;
@@ -121,6 +132,7 @@ header {
         }
     }
 
+    
     @media(min-width: $breakpoint-laptop) {
         .container-sadbar {
             display: none;

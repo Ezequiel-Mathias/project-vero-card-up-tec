@@ -44,7 +44,7 @@ const NavBarClient: React.FC = () => {
                         <div className='container-icon-close'>
 
                             <Icon name='close' onClick={showSidebar} />
-                            
+
                         </div>
 
                         <ul className="nav-list">

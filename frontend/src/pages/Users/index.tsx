@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavBarClient from "../../components/layout/NavBarClient";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
@@ -8,11 +8,14 @@ import Icon from "../../components/shared/Icon";
 import api from "../../connectionAPI";
 import ModalUsers from "../../components/layout/ModalUsers";
 import Swal from "sweetalert2";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 
 const PageUsers: React.FC = () => {
 
     const [users, setUsers] = useState([]);
+
+    const [searchUserText, setSearchUserText] = useState();
 
     const [editDataUser, setEditdatauser] = useState([]);
 
@@ -22,11 +25,13 @@ const PageUsers: React.FC = () => {
 
         const UsersPageRequests = async () => {
 
-            await api.get('/users')
+            await api.post('/searchUser', {
+                email: ""
+            })
                 .then((data) => {
                     setUsers(data.data);
-                }).catch(() => {
-
+                }).catch((error) => {
+                    console.log(error)
                 });
         }
 
@@ -35,7 +40,6 @@ const PageUsers: React.FC = () => {
     }, []);
 
     const handleModal = () => setModal(!modal)
-
 
     const DeleteUser = async (id: any) => {
 
@@ -82,6 +86,22 @@ const PageUsers: React.FC = () => {
         handleModal()
     }
 
+    const searchUser = async () => {
+        if(searchUserText){
+            console.log(searchUserText)
+        }
+
+    }
+
+    const tableRef: any = useRef();
+
+    const { onDownload } = useDownloadExcel({
+        currentTableRef: tableRef.current,
+        filename: "Web Users",
+        sheet: "Web Users"
+    })
+
+
     return (
 
         <div className="container-page-users">
@@ -90,13 +110,14 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-                <Input info="Pesquisar:" icon="search" />
+                <Input clickIcon={() =>  searchUser()} info="Pesquisar:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
 
             </div>
 
             <div className="table-container">
 
                 <div className="scroll-table">
+
                     <table >
                         <tr>
                             <td>Nome</td>
@@ -107,8 +128,8 @@ const PageUsers: React.FC = () => {
                             <td>Editar</td>
 
                         </tr>
-        
-                         {
+
+                        {
                             users &&
 
                             users.map((user: any) =>
@@ -133,9 +154,7 @@ const PageUsers: React.FC = () => {
                     </table>
                 </div>
 
-
             </div>
-
 
             <DownloadFacilitators textButton="Criar usuario" onClickButton={() => AddUser()} />
 

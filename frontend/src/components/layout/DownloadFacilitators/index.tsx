@@ -6,13 +6,15 @@ interface IDownloadFacilitators {
     printClick?: any
     csvClick?: any
     excelClick?: any
+    refExcel?:any
     wordClick?: any
     textButton : string
     onClickButton?: any
+    
 }
 
 
-const DownloadFacilitators: React.FC<IDownloadFacilitators> = ({ printClick, csvClick, excelClick, wordClick, onClickButton , textButton}) => {
+const DownloadFacilitators: React.FC<IDownloadFacilitators> = ({ printClick, csvClick, excelClick, wordClick, onClickButton, textButton}) => {
 
     return (
 
