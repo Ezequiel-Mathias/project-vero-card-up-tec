@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavBarClient from "../../components/layout/NavBarClient";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
@@ -8,13 +8,19 @@ import Icon from "../../components/shared/Icon";
 import api from "../../connectionAPI";
 import ModalUsers from "../../components/layout/ModalUsers";
 import Swal from "sweetalert2";
+import { useDownloadExcel } from "react-export-table-to-excel";
+import { isValidEmail } from "../../utils/Validation";
 
 
 const PageUsers: React.FC = () => {
 
     const [users, setUsers] = useState([]);
 
+    const [searchUserText, setSearchUserText] = useState('');
+
     const [editDataUser, setEditdatauser] = useState([]);
+
+    const [emailVerification, setEmailVerification] = useState(true);
 
     const [modal, setModal] = useState(false);
 
@@ -22,11 +28,13 @@ const PageUsers: React.FC = () => {
 
         const UsersPageRequests = async () => {
 
-            await api.get('/users')
+            await api.post('/searchUser', {
+                email: ""
+            })
                 .then((data) => {
                     setUsers(data.data);
-                }).catch(() => {
-
+                }).catch((error) => {
+                    console.log(error)
                 });
         }
 
@@ -35,7 +43,6 @@ const PageUsers: React.FC = () => {
     }, []);
 
     const handleModal = () => setModal(!modal)
-
 
     const DeleteUser = async (id: any) => {
 
@@ -82,6 +89,51 @@ const PageUsers: React.FC = () => {
         handleModal()
     }
 
+    const ValidateEmailInput = () => {
+
+        if (!isValidEmail(searchUserText)) {
+
+            setEmailVerification(false);
+
+            return false
+        }
+
+        setEmailVerification(true);
+
+        return true;
+    }
+
+    const searchUser = async () => {
+
+        if (searchUserText && !ValidateEmailInput()) {
+
+            setUsers([])
+
+            await api.post('/searchUser', {
+                email: searchUserText
+            })
+                .then((data) => {
+                    setUsers(data.data);
+                }).catch((error) => {
+                    console.log(error)
+                });
+        } else {
+            window.location.reload();
+        }
+
+    }
+
+    const tableRef: any = useRef();
+
+    const { onDownload } = useDownloadExcel({
+        currentTableRef: tableRef.current,
+        filename: "Web Users",
+        sheet: "Web Users"
+    })
+
+
+
+
     return (
 
         <div className="container-page-users">
@@ -90,14 +142,16 @@ const PageUsers: React.FC = () => {
 
             <div className="container-input-search">
 
-                <Input info="Pesquisar:" icon="search" />
-
+                <Input validate={() => ValidateEmailInput()} clickIcon={() => searchUser()} info="Pesquisar por email:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
+                {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
             </div>
 
             <div className="table-container">
 
                 <div className="scroll-table">
+
                     <table >
+
                         <tr>
                             <td>Nome</td>
                             <td>Email</td>
@@ -107,8 +161,8 @@ const PageUsers: React.FC = () => {
                             <td>Editar</td>
 
                         </tr>
-        
-                         {
+
+                        {
                             users &&
 
                             users.map((user: any) =>
@@ -133,9 +187,7 @@ const PageUsers: React.FC = () => {
                     </table>
                 </div>
 
-
             </div>
-
 
             <DownloadFacilitators textButton="Criar usuario" onClickButton={() => AddUser()} />
 

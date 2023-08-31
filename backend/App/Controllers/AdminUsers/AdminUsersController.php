@@ -83,7 +83,7 @@ final class AdminUsersController
 
         $adminUsersModel = new AdminUsersModel();
 
-        $adminUsersModel->setId($data['id'])->setNome($data['nome'])->setEmail($data['email'])->setSenha($data['senha']) -> setAdmin($data['admin']);
+        $adminUsersModel->setId($data['id'])->setNome($data['nome'])->setEmail($data['email'])->setSenha($data['senha'])->setAdmin($data['admin']);
 
         $adminUsersDAO->UpdateUsers($adminUsersModel);
 
@@ -141,7 +141,7 @@ final class AdminUsersController
 
     public function emailVerification(Request $request, Response $response, array $args): Response
     {
-        
+
         $data = $request->getParsedBody();
 
         if (empty(trim($data['email']))) {
@@ -166,6 +166,27 @@ final class AdminUsersController
         $adminUsersDataEmail = $adminUsersDAO->emailVerificationWhere($data['email']);
 
         $response = $response->withJson($adminUsersDataEmail);
+
+        return $response;
+    }
+
+    public function UserSearchEmail(Request $request, Response $response, array $args): Response
+    {
+
+        $data = $request->getParsedBody();
+
+        $adminUsersDAO = new AdminUsersDAO();
+
+        $subjectToken = $request->getAttribute('jwt');
+
+        if (empty(trim($data['email']))) {
+            $adminUsersDataSearchEmail = $adminUsersDAO->getAllUsers($subjectToken['sub']);
+        } else {
+            $adminUsersDataSearchEmail = $adminUsersDAO->UserSearchEmail($data['email']);
+        }
+
+
+        $response = $response->withJson($adminUsersDataSearchEmail);
 
         return $response;
     }

@@ -8,6 +8,7 @@ interface IInputProps extends React.HTMLProps<HTMLInputElement> {
     validate?: (name?: string) => boolean
     placeholder?: string
     value?: string
+    clickIcon?: any
 }
 
 const Input: React.FC<IInputProps> = (props) => {
@@ -34,7 +35,9 @@ const Input: React.FC<IInputProps> = (props) => {
                         <Icon name={textVisibility ? "visibility" : "visibility_off"} onClick={toggleVisibility} />
 
                         :
-                        props.icon && <Icon name={props.icon} />
+
+                        props.icon && <Icon name={props.icon} onClick={props.clickIcon} />
+                        
                 }
 
             </div>

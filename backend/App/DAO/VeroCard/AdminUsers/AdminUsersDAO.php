@@ -82,4 +82,13 @@ class AdminUsersDAO extends Connection
             return false;
         }
     }
+
+    public function UserSearchEmail(string $email)
+    {
+
+        $statement = $this->pdo
+            ->query("SELECT * FROM usuarios_vero_card WHERE email = '$email';")->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $statement;
+    }
 }
