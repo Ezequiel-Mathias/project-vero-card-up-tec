@@ -79,7 +79,7 @@ const ModalUsers: React.FC<IModalUsers> = ({ onClickClose, dataEdit }) => {
             Swal.fire({
                 icon: 'error',
                 title: 'A senha não confere...',
-                text: 'Senha não confere, confira os campos de senha..',
+                text: 'Senha não confere, confira os campos de senha.',
                 preConfirm: Button
             });
 
@@ -90,23 +90,32 @@ const ModalUsers: React.FC<IModalUsers> = ({ onClickClose, dataEdit }) => {
         return true;
     }
 
+    const EditUser = async () => {
+
+    }
+
     const CreateUser = async () => {
 
-        if (!isValidationCreateUser()) {
+        if (!isValidationCreateUser() || !ValidateEmail()) {
             return
         }
 
         await api.post('confirmEmail', {
             email: formValues.Email,
         }).then((data) => {
-            setComfirmEmail(data.data)
+            if(data.data === true){
+                setComfirmEmail(true)
+            }else{
+                setComfirmEmail(false)
+            }
+            
         }).catch(() => {
-
+            console.log("deu ruim ")
         });
 
         if (dataEdit.length === 0) {
-
-            if (!comfirmEmail) {
+            console.log(comfirmEmail);
+            if (comfirmEmail === false) {
                 await api.post('/users', {
                     nome: formValues.Name,
                     email: formValues.Email,
@@ -157,7 +166,6 @@ const ModalUsers: React.FC<IModalUsers> = ({ onClickClose, dataEdit }) => {
                 </div>
 
                 <h2>Cadastrar usuario</h2>
-
 
                 <div className="container-fields-user">
 

@@ -25,7 +25,7 @@ const Table: React.FC<ITable> = ({ data, column, titleTable, typeMessage, refExc
 
                 <DataTable
                     columns={column}
-                    data={data ? data : []}
+                    data={data}
                     striped={true}
                     responsive={true}
                     noDataComponent={typeMessage ? 'Erro ao carregar os dados...' : 'Nada a trazer...'}

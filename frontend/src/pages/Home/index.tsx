@@ -95,14 +95,14 @@ const PageHome: React.FC = () => {
             <DefaultHeader />
 
             <Table
-                data={inProductionData}
+                data={Array.isArray(inProductionData)  ? inProductionData : [] }
                 column={columnsInProduction}
                 titleTable="Em produção"
                 typeMessage={typeMessageInProduction}
             />
 
             <Table
-                data={awaitingReleaseData}
+                data={Array.isArray(awaitingReleaseData) ? awaitingReleaseData : []}
                 column={columnsAwaitingRelease}
                 titleTable="Aguardando liberação"
                 typeMessage={typeMessageAwaitingRelease}

@@ -89,9 +89,8 @@ const PageProductionReport: React.FC = () => {
 
                     setProductionReportData(data.data)
 
-                    
-
                 }).catch(() => {
+
                     setProductionReportMessage(true)
                 });
 
@@ -160,12 +159,12 @@ const PageProductionReport: React.FC = () => {
 
 
                 {
-                    ProductionReportData.length >= 1 &&
+                    Array.isArray(ProductionReportData) && ProductionReportData.length >= 1 &&
 
                     < Table
                         column={columnsProductionReport}
                         data={ProductionReportData}
-                        typeMessage={true}
+                        typeMessage={ProductionReportMessage}
                         refExcel={refExcel}
                     />
                     

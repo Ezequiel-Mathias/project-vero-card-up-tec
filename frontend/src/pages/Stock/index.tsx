@@ -117,7 +117,7 @@ const PageStock: React.FC = () => {
                 </div>
 
                 {
-                    stockData.length >= 1 &&
+                    Array.isArray(stockData) && stockData.length >= 1  &&
                     <Table
                         data={stockData}
                         column={columnsStock}

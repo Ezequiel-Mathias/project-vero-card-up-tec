@@ -105,20 +105,18 @@ const PageUsers: React.FC = () => {
 
     const searchUser = async () => {
 
-        if (searchUserText && !ValidateEmailInput()) {
-
-            setUsers([])
-
+        if (searchUserText && emailVerification) {
             await api.post('/searchUser', {
                 email: searchUserText
             })
                 .then((data) => {
+                    setUsers([])
                     setUsers(data.data);
                 }).catch((error) => {
                     console.log(error)
                 });
         } else {
-            window.location.reload();
+            return
         }
 
     }
@@ -133,7 +131,6 @@ const PageUsers: React.FC = () => {
 
 
 
-
     return (
 
         <div className="container-page-users">
@@ -144,6 +141,7 @@ const PageUsers: React.FC = () => {
 
                 <Input validate={() => ValidateEmailInput()} clickIcon={() => searchUser()} info="Pesquisar por email:" icon="search" onChange={(value: any) => setSearchUserText(value.target.value)} />
                 {!emailVerification ? <p>O e-mail inserido não é valido.</p> : null}
+                
             </div>
 
             <div className="table-container">
@@ -152,38 +150,40 @@ const PageUsers: React.FC = () => {
 
                     <table >
 
-                        <tr>
-                            <td>Nome</td>
-                            <td>Email</td>
-                            <td>Senha</td>
-                            <td>Adm</td>
-                            <td>Deletar</td>
-                            <td>Editar</td>
+                        <tbody>
 
-                        </tr>
+                            <tr>
+                                <td>Nome</td>
+                                <td>Email</td>
+                                <td>Senha</td>
+                                <td>Adm</td>
+                                <td>Deletar</td>
+                                <td>Editar</td>
 
-                        {
-                            users &&
+                            </tr>
 
-                            users.map((user: any) =>
-                                <tr>
-                                    <td>{user.nome}</td>
+                            {
+                                Array.isArray(users) &&
 
-                                    <td>{user.email}</td>
+                                users.map((user: any) =>
+                                    <tr key={user.id}>
+                                        <td>{user.nome}</td>
 
-                                    <td>{user.senha}</td>
+                                        <td>{user.email}</td>
 
-                                    <td>{user.admin == '0' ? 'NÃO' : 'SIM'}</td>
+                                        <td>{user.senha}</td>
 
-                                    <td><Icon name="delete" onClick={() => DeleteUser(user.id)} /></td>
+                                        <td>{user.admin == '0' ? 'NÃO' : 'SIM'}</td>
 
-                                    <td><Icon name="edit" onClick={() => EditUser(user)} /></td>
+                                        <td><Icon name="delete" onClick={() => DeleteUser(user.id)} /></td>
 
-                                </tr>
-                            )
-                        }
+                                        <td><Icon name="edit" onClick={() => EditUser(user)} /></td>
 
+                                    </tr>
+                                )
+                            }
 
+                        </tbody>
                     </table>
                 </div>
 
