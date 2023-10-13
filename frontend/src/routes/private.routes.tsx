@@ -10,6 +10,7 @@ import { Context } from '../AuthContext/AuthContext';
 
 
 
+
 const PrivateRouter: React.FC = () => {
 
     const { authenticated }: any = useContext(Context);
@@ -20,11 +21,12 @@ const PrivateRouter: React.FC = () => {
         <>
             {
                 authenticated ?
+
                     <Routes>
                         < Route path={`${process.env.PUBLIC_URL}/home`} element={< PageHome />} />
                         < Route path={`${process.env.PUBLIC_URL}/relatorio-producao`} element={< PageProductionReport />} />
                         < Route path={`${process.env.PUBLIC_URL}/estoque`} element={< PageStock />} />
-
+                        
                         {authenticatedAdmin ?
                             <>
                                 < Route path={`${process.env.PUBLIC_URL}/usuarios`} element={< PageUsers />} />

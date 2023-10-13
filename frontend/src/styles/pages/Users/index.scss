@@ -66,5 +66,15 @@
 
     }
 
+    @media print {
+
+        .container-download-facilitators-search {
+            display: none;
+        }
+
+        
+
+    }
+
 
 }

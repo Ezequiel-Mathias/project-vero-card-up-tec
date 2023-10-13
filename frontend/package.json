@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.2.6",
     "axios": "^1.4.0",
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
     "react-export-table-to-excel": "^1.0.6",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-csv": "^1.1.6",
     "sass": "^1.63.6"
   }
 }

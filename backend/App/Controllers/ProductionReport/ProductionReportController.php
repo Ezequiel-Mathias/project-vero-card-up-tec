@@ -121,17 +121,7 @@ final class ProductionReportController
 
         $response = $response->withJson($productionReport);
 
-        return $response;
-    }
-
-    public function Teste(Request $request, Response $response, array $args): Response
-    {
-
-        $productionReportDAO = new ProductionReportDAO();
-
-        $productionReport = $productionReportDAO->TESTE();
-
-        $response = $response->withJson($productionReport);
+        
 
         return $response;
     }

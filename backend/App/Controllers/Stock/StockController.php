@@ -46,22 +46,40 @@
 
         if(!empty(trim($data['desc_produto'])) && !empty(trim($data['cod_produto']))){
 
-            $stockData = $stockDAO -> FilterbyDescriptionProductsAndProductCode($stockModel , trim($desc_product));
+            $Data = $stockDAO -> FilterbyDescriptionProductsAndProductCode($stockModel , trim($desc_product));
+
+            $DataDesc_Material = $stockDAO -> FilterbyDescriptionProductsAndProductCodeDesc_Material($stockModel , trim($desc_product));
+
+            $stockData = [ $Data , $DataDesc_Material ];
 
         }else if (!empty($data['ativo']) && !empty(trim($data['cod_produto'])) && empty(trim($desc_product))){
 
-            $stockData = $stockDAO -> FilterbyProductCode($stockModel);
+            $Data = $stockDAO -> FilterbyProductCode($stockModel);
+
+            $DataDesc_Material = $stockDAO -> FilterbyProductCodeDesc_Material($stockModel);
+
+            $stockData = [ $Data , $DataDesc_Material ];
             
         }else if(!empty(trim($desc_product)) && !empty($data['ativo'])){
-            
-            $stockData = $stockDAO -> FilterbyDescriptionProduto($stockModel , trim($desc_product));
+
+            $Data = $stockDAO -> FilterbyDescriptionProduto($stockModel , trim($desc_product));
+
+            $DataDesc_Material = $stockDAO -> FilterbyDescriptionProdutoDesc_Material($stockModel , trim($desc_product));
+
+            $stockData = [ $Data , $DataDesc_Material ];
 
         }else{
-            $stockData = $stockDAO -> FilterbyActive($stockModel);
+
+            $Data = $stockDAO -> FilterbyActive($stockModel);
+
+            $DataDesc_Material = $stockDAO -> FilterbyActiveDesc_Material($stockModel);
+
+            $stockData = [ $Data , $DataDesc_Material ];
+
         }
 
         $response = $response -> withJson($stockData);
-      
+        
         return $response;
 
         }

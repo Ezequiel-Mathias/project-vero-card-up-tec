@@ -80,17 +80,6 @@ class ProductionReportDAO extends Connection
         return $response;
     }
 
-    public function TESTE(): array
-    {
-        $statement = $this->pdo->query("SELECT * FROM view_verocard_producao_tarja LIMIT 20");
-
-        $statement->execute();
-
-        $response = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-        return $response;
-    }
-
     public function getProductionReportFilterFileChipDAO(ProductionReportModel $productionReportModel): array
     {
 

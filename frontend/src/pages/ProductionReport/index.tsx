@@ -1,12 +1,18 @@
-import React, { useEffect, useState , useRef } from "react";
+import React, { useState, useRef } from "react";
 import DefaultHeader from "../../components/layout/DefaultHeader";
 import Input from "../../components/shared/Input";
 import DownloadFacilitators from "../../components/layout/DownloadFacilitators";
 import Select from "../../components/shared/Select";
 import api from "../../connectionAPI";
 import Table from "../../components/shared/Table";
-import {useDownloadExcel} from "react-export-table-to-excel";
+import { useDownloadExcel } from "react-export-table-to-excel";
 import Swal from "sweetalert2";
+
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 const PageProductionReport: React.FC = () => {
 
@@ -14,10 +20,12 @@ const PageProductionReport: React.FC = () => {
 
     const [ProductionReportMessage, setProductionReportMessage] = useState(false);
 
+    const navigate = useNavigate();
+
     const [formValues, setFormValues] = useState({
 
         fileName: "",
-        
+
         InitialProcessingDate: "",
 
         FinalProcessingDate: "",
@@ -56,16 +64,16 @@ const PageProductionReport: React.FC = () => {
             selector: (row: any) => row.dt_expedicao
         },
         {
-            name: 'Total de cartões',
+            name: 'Nome do arquivo',
             selector: (row: any) => row.total_cartoes
         },
         {
             name: 'Status',
-            selector: (row: any) => row.status
+            selector: (row: any) => row.dt_expedicao ? 'Expedido' : row.status
         },
         {
             name: 'Rastreio',
-            selector: (row: any) => row.rastreio  
+            selector: (row: any) => row.rastreio
         },
     ];
 
@@ -92,6 +100,7 @@ const PageProductionReport: React.FC = () => {
                 }).catch(() => {
 
                     setProductionReportMessage(true)
+
                 });
 
             } else {
@@ -113,20 +122,32 @@ const PageProductionReport: React.FC = () => {
     }
 
 
-    const refExcel : any = useRef();
+    const refExcel: any = useRef();
 
-    const {onDownload} = useDownloadExcel({
+    const { onDownload } = useDownloadExcel({
         currentTableRef: refExcel.current,
-        filename: "Web Users",
-        sheet:"Web Users"
+        filename: "Relatório de produção",
+        sheet: "Relatório de produção"
     })
+
+
+    const csvData = [
+        ["firstname", "lastname", "email"],
+        ["Ahmed", "Tomi", "ah@smthing.co.com"],
+        ["Raed", "Labes", "rl@smthing.co.com"],
+        ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+    ];
+
+
 
 
     return (
         <>
+
             <DefaultHeader sessionTheme="Relatorio de produção" />
 
             <div className="container-production-report">
+
                 <div className="container-inputs">
 
                     <div className="inputs">
@@ -146,12 +167,17 @@ const PageProductionReport: React.FC = () => {
                     </div>
 
                     <div className="inputs">
+
                         <Input type="date" name="InitialProcessingDate" info="Data de processamento inicial:" onChange={handleChange} />
+
                         <Input type="date" name="FinalProcessingDate" info="Data de processamento final:" onChange={handleChange} />
+
                     </div>
 
                     <div className="inputs">
+
                         <Input type="date" name="InitialShippingDate" info="Data de expedição inicial:" onChange={handleChange} />
+
                         <Input type="date" name="FinalShippingDate" info="Data de expedição final:" onChange={handleChange} />
                     </div>
 
@@ -167,10 +193,55 @@ const PageProductionReport: React.FC = () => {
                         typeMessage={ProductionReportMessage}
                         refExcel={refExcel}
                     />
-                    
+
                 }
 
-                <DownloadFacilitators textButton="Pesquisar"  excelClick={() => onDownload()} onClickButton={() => ProductionReportRequests()} printClick={() => window.print()} />
+
+
+
+                <div className="table-container-dowload">
+
+                    <div className="scroll-table-dowload">
+                        <table ref={refExcel}>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Código do produto</td>
+                                    <td>Descrição do produto</td>
+                                    <td>Data de processamento</td>
+                                    <td>Data de expedição</td>
+                                    <td>Total de cartões</td>
+                                    <td>Status</td>
+                                    <td>Rastreio</td>
+                                </tr>
+
+
+                                {
+                                    ProductionReportData.map((data: any) =>
+                                        <tr key={data.id}>
+                                            <td>{data.cod_produto}</td>
+                                            <td>{data.desc_produto}</td>
+                                            <td>{data.dt_processamento}</td>
+                                            <td>{data.dt_expedicao}</td>
+                                            <td>{data.total_cartoes}</td>
+                                            <td>{data.status}</td>
+                                            <td>{data.rastreio}</td>
+                                        </tr>
+                                    )
+                                }
+
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <DownloadFacilitators excelClick={() => onDownload()} textButton="Pesquisar" onClickButton={() => ProductionReportRequests()} csvData={ProductionReportData} />
 
             </div>
 

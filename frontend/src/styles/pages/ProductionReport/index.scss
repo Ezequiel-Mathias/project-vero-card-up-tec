@@ -56,21 +56,27 @@
         }
 
         .container-table {
+
+
+
             .sc-dmsloy {
                 max-height: max-content;
                 width: max-content;
-                width: 107.5rem;
+
 
 
                 .rdt_TableHeadRow {
-                    font-size: clamp(1.0rem, 2vw, 1.15rem);
+                    font-size: 2rem;
                     font-weight: $font-semibold;
                     text-align: center;
-                    
+
+
+
                     .sc-cseZMA {
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        width: 330px;
 
                         .sc-kDLnty {
                             opacity: 1;
@@ -81,18 +87,80 @@
                 .sc-jqNall {
 
                     .sc-hLljAB {
-
+                        
                         div {
-                            width: 200px;
+                            width: 300px;
                             text-align: center;
                             white-space: normal;
                             padding: 10px;
-                            font-size: clamp(0.875rem, 2vw, 1rem);
+                            font-size: 1.5rem;
+
                         }
 
                     }
 
                 }
+
+
+            }
+
+            .sc-iIXitQ {
+                display: none;
+            }
+        }
+
+    }
+
+
+    .table-container-dowload {
+        
+        margin-top: 62px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+
+
+        .scroll-table-dowload {
+            overflow-y: scroll;
+            height: 390px;
+            margin-left: 20px;
+            margin-right: 20px;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                height: 10px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-gray;
+                border-radius: 20px;
+            }
+
+            table {
+                max-height: max-content;
+
+
+                td {
+                    padding: 16px;
+                    width: 30px;
+                    text-align: center;
+                    border: solid 1px black;
+                    word-wrap: break-word;
+
+                    .icon{
+                        cursor: pointer;
+                    }
+                    
+                }
+
+
+
             }
         }
 

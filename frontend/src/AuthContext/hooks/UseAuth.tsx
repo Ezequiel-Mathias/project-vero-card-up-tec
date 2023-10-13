@@ -66,9 +66,9 @@ export function useAuth() {
 
             navigate(`${process.env.PUBLIC_URL}/home`);
 
-        }).catch(() => {
-            console.clear();
-
+        }).catch((error) => {
+          
+            console.log(error)
             Swal.fire({
                 icon: 'error',
                 title: 'Login invalido...',

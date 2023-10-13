@@ -6,7 +6,7 @@
     flex-direction: column;
     padding-left: clamp(1.25rem, 6vw, 4.375rem);
     padding-right: clamp(1.25rem, 6vw, 4.375rem);
-    
+
 
     .inputs-info-products {
         width: 100%;
@@ -15,6 +15,58 @@
         align-items: flex-end;
         margin-top: 32px;
     }
+
+    .container-quantity-of-materials{
+        margin-top: 32px;
+
+        p{
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .quantity-of-materials{
+            margin-top: 16px;
+            margin-bottom: -30px;
+            display: flex;
+            gap: 16px;
+
+            .quantity{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+
+
+    .container-table {
+
+
+        .sc-dmsloy {
+
+
+            .sc-jqNall {
+
+                .sc-hLljAB {
+
+
+                    div {
+
+                        width: 225px;
+
+
+                    }
+                }
+
+            }
+        }
+    }
+
+    .table-container-dowload{
+        display: none;
+    }
+
     @media (max-width: $breakpoint-medium) {
         .inputs-info-products {
             flex-direction: column;
@@ -22,4 +74,90 @@
             margin-top: 17px;
         }
     }
+
+
+    @media print {
+
+        .inputs-info-products {
+            display: none;
+        }
+
+        .button {
+            display: none;
+        }
+
+        .container-select {
+            display: none;
+        }
+
+        .container-download-facilitators-search {
+            display: none;
+        }
+
+        .container-table {
+
+
+
+            .sc-dmsloy {
+                max-height: max-content;
+                width: max-content;
+                padding-left: 400px;
+
+                .rdt_TableHeadRow {
+                    font-size: 2rem;
+                    font-weight: $font-semibold;
+                    text-align: center;
+
+                    .sc-cseZMA {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 320px;
+                        padding-right: 70px;
+
+                        .sc-kDLnty {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+                .sc-jqNall {
+                   
+                    .sc-hLljAB {
+
+                        div {
+                            width: 200px;
+                            text-align: center;
+                            white-space: normal;
+                            font-size: 1.5rem;
+                            
+
+                        }
+
+                        
+                    }
+
+                }
+
+
+            }
+
+            .sc-iIXitQ {
+                display: none;
+            }
+        }
+
+    }
+}
+
+@media print {
+
+
+    @page {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+
+
 }

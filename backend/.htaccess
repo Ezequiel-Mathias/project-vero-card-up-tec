@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteCond %{HTTPS} On
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+
+# Set the headers for the restful api
+<IfModule mod_rewrite.c>
+
+    Header set Access-Control-Allow-Origin: "*"
+    Header set Access-Control-Allow-Methods: "GET,POST,PUT,DELETE,OPTIONS"
+    Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Accept, Origin, Authorization"
+    Header set Access-Control-Allow-Headers: "X-Requested-Width, Content-Type"
+    Header always set Access-Control-Max-Age "10000"
+    
+</IfModule>
+
+
+
